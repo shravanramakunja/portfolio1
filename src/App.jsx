@@ -176,7 +176,7 @@ const demoItems = [
       <section className="relative z-10 flex flex-col items-center justify-center min-h-screen bg-transparent overflow-hidden">
         <div className="flex flex-col">
           <BlurText
-            text="Hey, I'm Shravan"
+            text="Hey, I'm Shravan Ramakunja"
             delay={150}
             animateBy="words"
             direction="top"
