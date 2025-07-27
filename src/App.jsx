@@ -376,7 +376,7 @@ function App() {
                 lineHeight: '1.8',
                 marginBottom: '2rem'
               }}>
-                I'm a passionate Data Science enthusiast with a focus on LLMs and Machine Learning. 
+                I'm a passionate Machine Learning enthusiast with a focus on LLMs and Gen AI tools. 
                 I love exploring the intersection of AI and practical applications while building automation scripts and diving deep into DSA.
               </p>
               <p style={{
