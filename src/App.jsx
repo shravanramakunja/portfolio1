@@ -3,6 +3,7 @@ import './index.css';
 import LinkedInIcon from './assets/linkedin-app-white-icon.svg';
 import GitHubIcon from './assets/github-white-icon.svg';
 import ResumeFile from './assets/Resume-Shravan.pdf';
+import GirlScriptCertificate from './assets/girlscript-certificate.jpg';
 
 // Add global styles for the portfolio
 const globalStyles = `
@@ -88,7 +89,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'projects', 'connect'];
+      const sections = ['home', 'about', 'experience', 'projects', 'connect'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -175,6 +176,7 @@ function App() {
             {[
               { name: 'Home', id: 'home' },
               { name: 'About', id: 'about' },
+              { name: 'Experience', id: 'experience' },
               { name: 'Projects', id: 'projects' },
               { name: 'Connect', id: 'connect' }
             ].map((item) => (
@@ -471,7 +473,7 @@ function App() {
             marginTop: '4rem'
           }}>
             <button
-              onClick={() => scrollToSection('projects')}
+              onClick={() => scrollToSection('experience')}
               style={{
                 padding: '12px 24px',
                 backgroundColor: 'transparent',
@@ -497,9 +499,278 @@ function App() {
                 e.target.style.transform = 'translateY(0)';
               }}
             >
-              View Projects
+              View Experience
               <span style={{ fontSize: '1.2rem', marginLeft: '0.25rem' }}>↓</span>
             </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <section id="experience" style={{
+        minHeight: '100vh',
+        padding: '8rem 2rem 4rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div style={{ maxWidth: '1200px', width: '100%' }}>
+          <h2 style={{
+            fontSize: 'clamp(2.5rem, 6vw, 4rem)',
+            fontWeight: 'bold',
+            marginBottom: '3rem',
+            textAlign: 'center'
+          }}>
+            Experience
+          </h2>
+          
+          {/* Timeline Container */}
+          <div style={{
+            position: 'relative',
+            maxWidth: '800px',
+            margin: '0 auto'
+          }}>
+            {/* Timeline Line */}
+            <div style={{
+              position: 'absolute',
+              left: '50%',
+              top: '0',
+              bottom: '0',
+              width: '2px',
+              backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)',
+              transform: 'translateX(-50%)'
+            }} />
+            
+            {/* Timeline Items */}
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '3rem'
+            }}>
+              
+              {/* GirlScript Summer Of Code 2025 */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                position: 'relative'
+              }}>
+                {/* Timeline Dot */}
+                <div style={{
+                  position: 'absolute',
+                  left: '50%',
+                  width: '16px',
+                  height: '16px',
+                  backgroundColor: isDarkMode ? '#fff' : '#000',
+                  borderRadius: '50%',
+                  transform: 'translateX(-50%)',
+                  zIndex: 2
+                }} />
+                
+                {/* Content Card - Right Side */}
+                <div style={{
+                  width: '45%',
+                  marginLeft: '55%',
+                  backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
+                  border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`,
+                  borderRadius: '12px',
+                  padding: '2rem',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'translateY(-5px)';
+                  e.target.style.backgroundColor = isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'translateY(0)';
+                  e.target.style.backgroundColor = isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
+                }}
+                >
+                  <div style={{
+                    fontSize: '0.9rem',
+                    color: isDarkMode ? '#888' : '#666',
+                    marginBottom: '0.5rem'
+                  }}>
+                    2025
+                  </div>
+                  <h3 style={{
+                    fontSize: '1.3rem',
+                    fontWeight: 'bold',
+                    marginBottom: '0.5rem',
+                    color: isDarkMode ? '#fff' : '#000'
+                  }}>
+                    GirlScript Summer Of Code 2025
+                  </h3>
+                  <p style={{
+                    fontSize: '1rem',
+                    color: isDarkMode ? '#888' : '#666',
+                    marginBottom: '1rem'
+                  }}>
+                    Open Source Contributor
+                  </p>
+                  <p style={{
+                    color: isDarkMode ? '#ccc' : '#666',
+                    lineHeight: '1.6',
+                    fontSize: '0.9rem',
+                    marginBottom: '1rem'
+                  }}>
+                    Contributed to various open-source projects, collaborated with developers worldwide, and enhanced coding skills through real-world project experience.
+                  </p>
+                  <a 
+                    href="https://img.playbook.com/fck94N93juKpzrBQEm9YGqQQ0RnomJ4d_SN9lxrDZlY/Z3M6Ly9wbGF5Ym9v/ay1hc3NldHMtcHVi/bGljLzA1ZmY2YjZi/LTFjODYtNDEyNC1h/ZTkzLTEzZjRhZTdj/NWUyOA"
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'inline-block',
+                      padding: '0.5rem 1rem',
+                      backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+                      borderRadius: '6px',
+                      textDecoration: 'none',
+                      color: isDarkMode ? '#fff' : '#000',
+                      fontSize: '0.85rem',
+                      fontWeight: '500',
+                      transition: 'all 0.2s ease'
+                    }}
+                  >
+                    View Certificate →
+                  </a>
+                </div>
+              </div>
+
+              {/* Design Sub Lead at Nova Innovative Compskey */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                position: 'relative'
+              }}>
+                {/* Timeline Dot */}
+                <div style={{
+                  position: 'absolute',
+                  left: '50%',
+                  width: '16px',
+                  height: '16px',
+                  backgroundColor: isDarkMode ? '#fff' : '#000',
+                  borderRadius: '50%',
+                  transform: 'translateX(-50%)',
+                  zIndex: 2
+                }} />
+                
+                {/* Content Card - Left Side */}
+                <div style={{
+                  width: '45%',
+                  marginRight: '55%',
+                  backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
+                  border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`,
+                  borderRadius: '12px',
+                  padding: '2rem',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'translateY(-5px)';
+                  e.target.style.backgroundColor = isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'translateY(0)';
+                  e.target.style.backgroundColor = isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
+                }}
+                >
+                  <div style={{
+                    fontSize: '0.9rem',
+                    color: isDarkMode ? '#888' : '#666',
+                    marginBottom: '0.5rem'
+                  }}>
+                    Nov 2024 - Present • 9 mos
+                  </div>
+                  <h3 style={{
+                    fontSize: '1.3rem',
+                    fontWeight: 'bold',
+                    marginBottom: '0.5rem',
+                    color: isDarkMode ? '#fff' : '#000'
+                  }}>
+                    Design Sub Lead
+                  </h3>
+                  <p style={{
+                    fontSize: '1rem',
+                    color: isDarkMode ? '#888' : '#666',
+                    marginBottom: '1rem'
+                  }}>
+                    Nova Innovative Compskey • Banglore
+                  </p>
+                  <p style={{
+                    color: isDarkMode ? '#ccc' : '#666',
+                    lineHeight: '1.6',
+                    fontSize: '0.9rem',
+                    marginBottom: '1rem'
+                  }}>
+                    Guide and supervise the club's design team in developing engineering project concepts and visual elements. Coordinate with fellow mates and the core leadership team to ensure project designs align with club objectives and technical standards.
+                  </p>
+                  <div style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '0.5rem'
+                  }}>
+                    <span style={{
+                      padding: '0.25rem 0.75rem',
+                      backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+                      borderRadius: '12px',
+                      fontSize: '0.75rem',
+                      color: isDarkMode ? '#fff' : '#000'
+                    }}>
+                      Team Management
+                    </span>
+                    <span style={{
+                      padding: '0.25rem 0.75rem',
+                      backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+                      borderRadius: '12px',
+                      fontSize: '0.75rem',
+                      color: isDarkMode ? '#fff' : '#000'
+                    }}>
+                      Canva
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          
+          {/* LinkedIn Profile Link */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '3rem'
+          }}>
+            <a 
+              href="https://www.linkedin.com/in/shravan-ramakunja-4b3a25291/"
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{
+                padding: '12px 24px',
+                backgroundColor: 'transparent',
+                border: `2px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)'}`,
+                borderRadius: '8px',
+                color: isDarkMode ? '#fff' : '#000',
+                textDecoration: 'none',
+                fontSize: '1rem',
+                fontWeight: '600',
+                transition: 'all 0.3s ease',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+                e.target.style.borderColor = isDarkMode ? '#fff' : '#000';
+                e.target.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'transparent';
+                e.target.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)';
+                e.target.style.transform = 'translateY(0)';
+              }}
+            >
+              View Full Profile on LinkedIn
+              <span style={{ fontSize: '1rem' }}>↗</span>
+            </a>
           </div>
         </div>
       </section>
