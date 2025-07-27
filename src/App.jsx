@@ -100,7 +100,33 @@ const globalStyles = `
     
     .nav-button {
       font-size: 0.9rem !important;
-      padding: 0.25rem !important;
+      padding: 0.25rem 0.5rem !important;
+      min-height: 44px;
+    }
+    
+    .hero-section {
+      padding: 0 1rem !important;
+    }
+    
+    .hero-social-links {
+      flex-direction: column !important;
+      gap: 1rem !important;
+    }
+    
+    .connect-links {
+      gap: 0.75rem !important;
+      justify-content: center !important;
+    }
+    
+    .connect-link {
+      padding: 0.75rem 1rem !important;
+      font-size: 0.9rem !important;
+    }
+    
+    .footer-content {
+      flex-direction: column !important;
+      gap: 1rem !important;
+      text-align: center !important;
     }
   }
   
@@ -126,8 +152,27 @@ const globalStyles = `
     }
     
     .nav-button {
-      font-size: 0.85rem !important;
-      padding: 0.2rem !important;
+      font-size: 0.8rem !important;
+      padding: 0.5rem 0.75rem !important;
+      min-height: 40px;
+    }
+    
+    .hero-section {
+      padding: 0 0.75rem !important;
+    }
+    
+    .connect-links {
+      gap: 0.5rem !important;
+    }
+    
+    .connect-link {
+      padding: 0.5rem 0.75rem !important;
+      font-size: 0.8rem !important;
+    }
+    
+    .footer-content {
+      flex-direction: column !important;
+      gap: 0.75rem !important;
     }
   }
 `;
@@ -291,14 +336,18 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" style={{
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-        padding: '0 2rem'
-      }}>
+      <section 
+        id="home" 
+        className="hero-section"
+        style={{
+          height: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+          padding: '0 2rem'
+        }}
+      >
         <div style={{ maxWidth: '800px' }}>
           <h1 style={{
             fontSize: 'clamp(3rem, 8vw, 6rem)',
@@ -323,12 +372,15 @@ function App() {
           </p>
           
           {/* Social Links */}
-          <div style={{
-            display: 'flex',
-            gap: '1.5rem',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}>
+          <div 
+            className="hero-social-links"
+            style={{
+              display: 'flex',
+              gap: '1.5rem',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
             <a 
               href="https://github.com/shravanramakunja" 
               target="_blank" 
@@ -775,11 +827,11 @@ function App() {
                     marginRight: '55%',
                     marginLeft: '0',
                     backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
-                  border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`,
-                  borderRadius: '12px',
-                  padding: window.innerWidth <= 480 ? '1.5rem' : '2rem',
-                  transition: 'all 0.3s ease'
-                }}
+                    border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`,
+                    borderRadius: '12px',
+                    padding: '2rem',
+                    transition: 'all 0.3s ease'
+                  }}
                 onMouseEnter={(e) => {
                   e.target.style.transform = 'translateY(-5px)';
                   e.target.style.backgroundColor = isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)';
@@ -1042,16 +1094,20 @@ function App() {
             </a>
           </p>
           
-          <div style={{ 
-            display: 'flex', 
-            gap: '20px',
-            marginBottom: '40px',
-            flexWrap: 'wrap'
-          }}>
+          <div 
+            className="connect-links"
+            style={{ 
+              display: 'flex', 
+              gap: '20px',
+              marginBottom: '40px',
+              flexWrap: 'wrap'
+            }}
+          >
             <a 
               href="https://github.com/shravan-ramakunja" 
               target="_blank" 
               rel="noopener noreferrer"
+              className="connect-link"
               style={{ 
                 padding: '8px 16px',
                 backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
@@ -1070,6 +1126,7 @@ function App() {
               href="https://twitter.com/shravan-ramakunja" 
               target="_blank" 
               rel="noopener noreferrer"
+              className="connect-link"
               style={{ 
                 padding: '8px 16px',
                 backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
@@ -1088,6 +1145,7 @@ function App() {
               href="https://linkedin.com/in/shravan-ramakunja" 
               target="_blank" 
               rel="noopener noreferrer"
+              className="connect-link"
               style={{ 
                 padding: '8px 16px',
                 backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
@@ -1106,6 +1164,7 @@ function App() {
               href="https://instagram.com/_shravaan" 
               target="_blank" 
               rel="noopener noreferrer"
+              className="connect-link"
               style={{ 
                 padding: '8px 16px',
                 backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
@@ -1122,13 +1181,16 @@ function App() {
           </div>
 
           {/* Footer with Theme Toggle */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingTop: '40px',
-            borderTop: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`
-          }}>
+          <div 
+            className="footer-content"
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              paddingTop: '40px',
+              borderTop: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`
+            }}
+          >
             <p style={{
               fontSize: '14px',
               color: isDarkMode ? '#666' : '#888'
