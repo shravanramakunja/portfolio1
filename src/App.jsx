@@ -87,6 +87,21 @@ const globalStyles = `
       margin-left: 0 !important;
       margin-right: 0 !important;
     }
+    
+    nav {
+      padding: 0.75rem 1rem !important;
+    }
+    
+    .nav-links {
+      gap: 1rem !important;
+      flex-wrap: wrap !important;
+      justify-content: center !important;
+    }
+    
+    .nav-button {
+      font-size: 0.9rem !important;
+      padding: 0.25rem !important;
+    }
   }
   
   @media (max-width: 480px) {
@@ -100,6 +115,19 @@ const globalStyles = `
     
     .timeline-title {
       font-size: 1.1rem !important;
+    }
+    
+    nav {
+      padding: 0.5rem 0.75rem !important;
+    }
+    
+    .nav-links {
+      gap: 0.5rem !important;
+    }
+    
+    .nav-button {
+      font-size: 0.85rem !important;
+      padding: 0.2rem !important;
     }
   }
 `;
@@ -213,15 +241,21 @@ function App() {
         borderBottom: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`,
         transition: 'all 0.3s ease'
       }}>
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          maxWidth: '1200px',
-          margin: '0 auto'
-        }}>
+        <div 
+          className="nav-container"
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            maxWidth: '1200px',
+            margin: '0 auto'
+          }}
+        >
           
-          <div style={{ display: 'flex', gap: '2rem' }}>
+          <div 
+            className="nav-links" 
+            style={{ display: 'flex', gap: '2rem' }}
+          >
             {[
               { name: 'Home', id: 'home' },
               { name: 'About', id: 'about' },
@@ -231,6 +265,7 @@ function App() {
             ].map((item) => (
               <button
                 key={item.id}
+                className="nav-button"
                 onClick={() => scrollToSection(item.id)}
                 style={{
                   background: 'none',
