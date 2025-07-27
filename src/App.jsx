@@ -1,487 +1,815 @@
-import GooeyNav from './component/GooeyNav'
-import Beams from './component/Beams';
-import './App.css'
-import SplashCursor from './component/SplashCursor';
-import BlurText from './component/BlurText';
-import RotatingText from './component/RotatingText';
-import TrueFocus from './component/TrueFocus';
-import InfiniteScroll from './component/InfiniteScroll';
-import TextPressure from './component/TextPressure';
-import FlowingMenu from './component/FlowingMenu';
-import ImageTrail from './component/ImageTrail';
-import CardSwap, { Card } from './component/CardSwap'
-import { useState } from 'react';
-import FuzzyText from './component/FuzzyText';
-import InfiniteMenu from './component/InfiniteMenu';
-import ScrollVelocity from './component/ScrollVelocity';
-import CircularGallery from './component/CircularGallery';
-import { useRef } from 'react';
-import VariableProximity from './component/VariableProximity';
-import Crosshair from './component/Crosshair';
-import FallingText from './component/FallingText';
-import BlobCursor from './component/BlobCursor';
-import SpotlightCard from './component/SpotlightCard';
-import infimenu1 from './assets/infimenu1.svg';
-import infimenu3 from './assets/inifmenu3.svg';
-import infimenu4 from './assets/infimenu4.svg';
-import inifmenu5 from './assets/inifmenu5.svg';
-import resumePdf from './assets/Resume-Shravan.pdf';
-function App() {
-  const containerRef = useRef(null);
+import React, { useEffect, useState } from 'react';
+import './index.css';
+import LinkedInIcon from './assets/linkedin-app-white-icon.svg';
+import GitHubIcon from './assets/github-white-icon.svg';
+import ResumeFile from './assets/Resume-Shravan.pdf';
 
-  // Function to download resume
-  const downloadResume = (e) => {
-    e?.preventDefault();
-    try {
-      const link = document.createElement('a');
-      link.href = resumePdf;
-      link.download = 'Resume-Shravan.pdf';
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      // Fallback for browsers that don't support download attribute
-      setTimeout(() => {
-        window.URL.revokeObjectURL(link.href);
-      }, 100);
-    } catch (error) {
-      console.error('Error downloading resume:', error);
-      // Fallback: open in new tab
-      window.open(resumePdf, '_blank');
-    }
-  };
-
-const items1 = [
-  {
-    image: infimenu1,
-    link: 'https://github.com/shravanramakunja/BreifBot',
-    title: 'BriefBot',
-  },
-  {
-    image: infimenu3,
-    link: 'https://github.com/shravanramakunja/DataAnalysis',
-    title: 'Data Analysis',
-  },
-  {
-    image: infimenu4,
-    link: 'https://github.com/shravanramakunja/BrewedAtNight',
-    title: 'Brewed at Night',
-  },
-  {
-    image: inifmenu5,
-    link: 'https://drive.google.com/drive/folders/1JGwqipErwHlj4vi7V5tvkJ784UCe9vfS',
-    title: 'Graphic Design',
+// Add global styles for the portfolio
+const globalStyles = `
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
+  
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    background-color: #000;
+    color: #fff;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  #root {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+  
+  @keyframes blink {
+    0%, 50% {
+      opacity: 1;
+    }
+    51%, 100% {
+      opacity: 0;
+    }
+  }
+`;
+
+// Inject styles into document head
+if (typeof document !== 'undefined') {
+  const existingStyle = document.querySelector('#portfolio-styles');
+  if (!existingStyle) {
+    const styleElement = document.createElement('style');
+    styleElement.id = 'portfolio-styles';
+    styleElement.textContent = globalStyles;
+    document.head.appendChild(styleElement);
+  }
+}
+
+// Navigation scroll function
+const scrollToSection = (sectionId) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
+// Typewriter animation phrases
+const phrases = [
+  "ML & AI Explorer", 
+  "DevOps Learner",
+  "Automation Scripts Builder"
 ];
 
+function App() {
+  const [activeSection, setActiveSection] = useState('home');
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [displayText, setDisplayText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['home', 'about', 'projects', 'connect'];
+      const scrollPosition = window.scrollY + 100;
 
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetHeight = element.offsetHeight;
 
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
 
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
+  useEffect(() => {
+    const currentPhrase = phrases[currentIndex];
+    let charIndex = 0;
+    
+    const typeInterval = setInterval(() => {
+      if (charIndex < currentPhrase.length) {
+        setDisplayText(currentPhrase.slice(0, charIndex + 1));
+        charIndex++;
+      } else {
+        clearInterval(typeInterval);
+        setTimeout(() => {
+          const deleteInterval = setInterval(() => {
+            if (charIndex > 0) {
+              setDisplayText(currentPhrase.slice(0, charIndex - 1));
+              charIndex--;
+            } else {
+              clearInterval(deleteInterval);
+              setCurrentIndex((prevIndex) => (prevIndex + 1) % phrases.length);
+            }
+          }, 50);
+        }, 2000);
+      }
+    }, 100);
 
+    return () => clearInterval(typeInterval);
+  }, [currentIndex]);
 
-
-
-
-
-const [velocity, _setVelocity] = useState(125)
-
-
-
-
-  const [isCardSwapHovered, setIsCardSwapHovered] = useState(false);
-  
-  const handleAnimationComplete = () => {
-    console.log('Animation completed!');
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
   };
-
-  const scrollItems = [
-    { content: "Pursuing CSE in MVJCE BANGLORE" },
-    { content: <h1>Scroll or Drag to Know More</h1> },
-    { content: "Passionated about desgining User Interfaces" },
-    { content: "Currently into Data Science" },
-    { content: <p>Just finding those expose api key is currently what i am doing</p> },
-    { content: "Exploring the world of AI and ML" },
-  ];
-
-  const items = [
-    { label: "Home", href: "#" },
-    { label: "Github", href: "https://github.com/shravanramakunja", target: "_blank" },
-    { label: "Resume", onClick: downloadResume }
-  ];
-
-  
-const demoItems = [
-  {  text: 'React', image: 'https://picsum.photos/600/400?random=1' },
-  {  text: 'Javascript', image: 'https://picsum.photos/600/400?random=2' },
-  {text: 'Pandas', image: 'https://picsum.photos/600/400?random=3' },
-  {  text: 'Python', image: 'https://picsum.photos/600/400?random=4' }
-];
 
   return (
-    <>
-      {/* Background Effects */}
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
-          backgroundColor: '#000',
-          overflow: 'hidden',
-          zIndex: 0,
-        }}
-      >
-        <Beams
-          beamWidth={2}
-          beamHeight={15}
-          beamNumber={12}
-          lightColor="#ffffff"
-          speed={2}
-          noiseIntensity={1.75}
-          scale={0.2}
-          rotation={0}
-        />
-      </div>
-      {/* Decreased SPLAT_RADIUS for less spreading */}
-      <SplashCursor SPLAT_RADIUS={0.08} excludeSelector=".flowing-menu-container, .cardswap-container, .variable-proximity-container, #variable-proximity-section, .crosshair-container, .infinite-menu-container" />
-
-      {/* GooeyNav in top-right corner */}
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          right: 0,
-          zIndex: 10,
-          padding: '2rem',
-        }}
-      >
-        <GooeyNav
-          items={items}
-          particleCount={15}
-          particleDistances={[90, 10]}
-          particleR={100}
-          initialActiveIndex={0}
-          animationTime={600}
-          timeVariance={300}
-          colors={[1, 2, 3, 1, 2, 3, 1, 4]}
-        />
-      </div>
-
-      {/* HERO SECTION */}
-      <section className="relative z-10 flex flex-col items-center justify-center min-h-screen bg-transparent overflow-hidden">
-        <div className="flex flex-col">
-          <BlurText
-            text="Hey, I'm Shravan Ramakunja"
-            delay={150}
-            animateBy="words"
-            direction="top"
-            onAnimationComplete={handleAnimationComplete}
-            className="text-8xl mb-4 text-white font-bold text-center"
-          />
-          <RotatingText
-            texts={['Future Engineering', 'React Enthusiast', 'Day Dreamer', 'Graphic Designer']}
-            mainClassName="text-4xl text-white font-bold overflow-hidden self-start"
-            staggerFrom={"last"}
-            initial={{ y: "100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "-120%" }}
-            staggerDuration={0.025}
-            splitLevelClassName="overflow-hidden"
-            transition={{ type: "spring", damping: 30, stiffness: 400 }}
-            rotationInterval={2000}
-          />
-        </div>
-      </section>
-
-      {/* TRUE FOCUS SECTION with font size matching TextPressure */}
-      <section className="relative z-20 flex justify-center items-center mb-6">
-        <TrueFocus 
-          sentence="About Me"
-          manualMode={false}
-          blurAmount={5}
-          borderColor="red"
-          animationDuration={1}
-          pauseBetweenAnimations={0.5}
-          className="text-white font-bold text-[clamp(3rem,8vw,7rem)]"
-        />
-      </section>
-
-      {/* INFINITE SCROLL SECTION with top margin */}
-      <div style={{ height: '500px', position: 'relative' }} className="mt-12">
-        <InfiniteScroll
-          items={scrollItems}
-          isTilted={true}
-          tiltDirection='left'
-          autoplay={true}
-          autoplaySpeed={0.1}
-          autoplayDirection="down"
-          pauseOnHover={true}
-          className="text-white"
-        />
-      </div>
-
-      <div style={{position: 'relative', height: '300px'}}>
-        <TextPressure
-          text="Tech Stack"
-          flex={false}
-          alpha={false}
-          stroke={false}
-          width={true}
-          weight={true}
-          italic={true}
-          textColor="#ffffff"
-          strokeColor="#ff0000"
-          minFontSize={25}
-        />
-      </div>
-<div style={{ height: '600px', position: 'relative' }} className="flowing-menu-container">
-  <FlowingMenu items={demoItems} />
-</div>
-
-
-
-
-
-
-
-<div 
-  style={{ height: '600px', position: 'relative' }} 
-  className="cardswap-container"
-  onMouseEnter={() => setIsCardSwapHovered(true)}
-  onMouseLeave={() => setIsCardSwapHovered(false)}
->
-  {/* ImageTrail overlay - positioned before other elements */}
-  {isCardSwapHovered && (
     <div style={{ 
-      position: 'absolute', 
-      top: 0, 
-      left: 0, 
-      width: '100%', 
-      height: '100%', 
-      zIndex: 20,
-      pointerEvents: 'auto'
-    }}>
-      <ImageTrail
-        items={[
-          'https://picsum.photos/id/100/300/300',
-          'https://picsum.photos/id/200/300/300',
-          'https://picsum.photos/id/300/300/300',
-          'https://picsum.photos/id/400/300/300',
-          'https://picsum.photos/id/500/300/300',
-          'https://picsum.photos/id/600/300/300',
-          'https://picsum.photos/id/700/300/300',
-          'https://picsum.photos/id/800/300/300',
-        ]}
-        variant={1}
-      />
-    </div>
-  )}
-
-  {/* Education BlurText positioned to the left */}
-  <div className="absolute left-8 top-1/2 transform -translate-y-1/2 z-10">
-    <BlurText
-      text="EDUCATION"
-      delay={150}
-      animateBy="words"
-      direction="top"
-      className="text-6xl font-bold text-white"
-    />
-  </div>
-  
-  <CardSwap
-    cardDistance={60}
-    verticalDistance={70}
-    delay={2400}
-    pauseOnHover={false}
-  >
-    <Card>
-      <SpotlightCard 
-        className="h-full min-h-[300px]" 
-        spotlightColor="rgba(82, 39, 255, 0.4)"
-      >
-        <div className="flex flex-col items-center justify-center h-full text-center">
-          <h1 className="text-3xl font-bold text-white mb-4">MVJ COLLEGE OF ENGINEERING BANGALORE</h1>
-          <p className="text-xl font-bold text-white mb-2">BE IN COMPUTER SCIENCE</p>
-          <h2 className="text-2xl font-bold text-white">CGPA: 8.5</h2>
-        </div>
-      </SpotlightCard>
-    </Card>
-    <Card>
-      <SpotlightCard 
-        className="h-full min-h-[300px]" 
-        spotlightColor="rgba(82, 39, 255, 0.4)"
-      >
-        <div className="flex flex-col items-center justify-center h-full text-center">
-          <h1 className="text-3xl font-bold text-white mb-4">VIVEKANANDA PU COLLEGE PUTTUR</h1>
-          <p className="text-xl font-bold text-white mb-2">PUC IN SCIENCE</p>
-          <h2 className="text-2xl font-bold text-white">Percentage: 96%</h2>
-        </div>
-      </SpotlightCard>
-    </Card>
-  </CardSwap>
-</div>
-
-{/* FuzzyText positioned right after the cardswap container */}
-<div className="relative flex justify-center items-center py-28">
-  <FuzzyText 
-    baseIntensity={0.2} 
-    hoverIntensity={0.8} 
-    enableHover={true}
-    className="text-white text-4xl font-bold"
-    style={{ overflow: 'visible' }}
-  >
-    Works
-  </FuzzyText>
-</div>
-
-
-<div className="relative flex justify-center items-center py-8">
-  <BlurText
-    text="Drag the Circle to know more"
-    delay={150}
-    animateBy="words"
-    direction="top"
-    className="text-white text-3xl font-bold"
-  />
-</div>
-
-{/* InfiniteMenu positioned right below Works (FuzzyText) and above ScrollVelocity */}
-<div 
-  className="infinite-menu-container w-full h-screen relative"
-  onMouseMove={(e) => {
-    // Dispatch a custom event that BlobCursor can listen to
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    window.dispatchEvent(new CustomEvent('infiniteMenuMouseMove', { 
-      detail: { x, y, containerRect: rect } 
-    }));
-  }}
->
-  <InfiniteMenu items={items1}/>
-  <div 
-    id="blob-cursor-container"
-    style={{
-      position: 'absolute',
-      top: 0,
-      left: 0,
+      backgroundColor: isDarkMode ? '#000' : '#fff', 
+      color: isDarkMode ? '#fff' : '#000', 
+      minHeight: '100vh',
       width: '100%',
-      height: '100%',
-      pointerEvents: 'none',
-      zIndex: 1
-    }}
-  >
-    <BlobCursor
-      blobType="circle"
-      fillColor="#FF0000"
-      trailCount={3}
-      sizes={[60, 125, 75]}
-      innerSizes={[20, 35, 25]}
-      innerColor="rgba(255,255,255,0.8)"
-      opacities={[0.6, 0.6, 0.6]}
-      shadowColor="rgba(0,0,0,0.75)"
-      shadowBlur={5}
-      shadowOffsetX={10}
-      shadowOffsetY={10}
-      filterStdDeviation={30}
-      useFilter={true}
-      fastDuration={0.1}
-      slowDuration={0.5}
-      zIndex={100}
-    />
-  </div>
-</div>
+      overflowX: 'hidden',
+      overflowY: 'auto',
+      transition: 'background-color 0.3s ease, color 0.3s ease'
+    }}>
+      {/* Fixed Navigation Bar */}
+      <nav style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.9)' : 'rgba(255, 255, 255, 0.9)',
+        backdropFilter: 'blur(10px)',
+        padding: '1rem 2rem',
+        zIndex: 1000,
+        borderBottom: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`,
+        transition: 'all 0.3s ease'
+      }}>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          maxWidth: '1200px',
+          margin: '0 auto'
+        }}>
+          
+          <div style={{ display: 'flex', gap: '2rem' }}>
+            {[
+              { name: 'Home', id: 'home' },
+              { name: 'About', id: 'about' },
+              { name: 'Projects', id: 'projects' },
+              { name: 'Connect', id: 'connect' }
+            ].map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: activeSection === item.id 
+                    ? (isDarkMode ? '#fff' : '#000') 
+                    : (isDarkMode ? '#888' : '#666'),
+                  fontSize: '1rem',
+                  cursor: 'pointer',
+                  transition: 'color 0.3s ease',
+                  fontWeight: activeSection === item.id ? '600' : '400'
+                }}
+                onMouseEnter={(e) => e.target.style.color = isDarkMode ? '#fff' : '#000'}
+                onMouseLeave={(e) => e.target.style.color = activeSection === item.id 
+                  ? (isDarkMode ? '#fff' : '#000') 
+                  : (isDarkMode ? '#888' : '#666')}
+              >
+                {item.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      </nav>
 
-{/* "Drag to Know More" text between Works and InfiniteMenu */}
+      {/* Hero Section */}
+      <section id="home" style={{
+        height: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        padding: '0 2rem'
+      }}>
+        <div style={{ maxWidth: '800px' }}>
+          <h1 style={{
+            fontSize: 'clamp(3rem, 8vw, 6rem)',
+            fontWeight: 'bold',
+            marginBottom: '1rem',
+            lineHeight: '1.1'
+          }}>
+            Shravan Ramakunja
+          </h1>
+          <p style={{
+            fontSize: '1.5rem',
+            color: isDarkMode ? '#888' : '#555',
+            marginBottom: '3rem',
+            lineHeight: '1.4',
+            minHeight: '2.1rem'
+          }}>
+            {displayText}<span style={{ 
+              opacity: displayText.length > 0 ? 1 : 0,
+              animation: 'blink 1s infinite',
+              marginLeft: '2px'
+            }}>|</span>
+          </p>
+          
+          {/* Social Links */}
+          <div style={{
+            display: 'flex',
+            gap: '1.5rem',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <a 
+              href="https://github.com/shravanramakunja" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '50px',
+                height: '50px',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                borderRadius: '50%',
+                transition: 'all 0.3s ease',
+                border: '1px solid rgba(255, 255, 255, 0.2)'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                e.target.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                e.target.style.transform = 'translateY(0)';
+              }}
+            >
+              <img 
+                src={GitHubIcon} 
+                alt="GitHub" 
+                style={{ 
+                  width: '24px', 
+                  height: '24px',
+                  filter: 'brightness(0) invert(1)'
+                }} 
+              />
+            </a>
+            
+            <a 
+              href="https://www.linkedin.com/in/shravan-ramakunja-4b3a25291/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '50px',
+                height: '50px',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                borderRadius: '50%',
+                transition: 'all 0.3s ease',
+                border: '1px solid rgba(255, 255, 255, 0.2)'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                e.target.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                e.target.style.transform = 'translateY(0)';
+              }}
+            >
+              <img 
+                src={LinkedInIcon} 
+                alt="LinkedIn" 
+                style={{ 
+                  width: '24px', 
+                  height: '24px',
+                  filter: 'brightness(0) invert(1)'
+                }} 
+              />
+            </a>
 
+            <a 
+              href={ResumeFile}
+              download="Shravan-Ramakunja-Resume.pdf"
+              style={{
+                padding: '12px 24px',
+                backgroundColor: 'transparent',
+                border: '2px solid #fff',
+                borderRadius: '8px',
+                color: '#fff',
+                textDecoration: 'none',
+                fontSize: '1rem',
+                fontWeight: '600',
+                transition: 'all 0.3s ease',
+                marginLeft: '1rem'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#fff';
+                e.target.style.color = '#000';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'transparent';
+                e.target.style.color = '#fff';
+              }}
+            >
+              Resume
+            </a>
+          </div>
+        </div>
+      </section>
 
-<ScrollVelocity
-  texts={['DESIGNWORKS','PHOTOGRAPHY']} 
-  velocity={velocity} 
-  className="custom-scroll-text"
-/>
+      {/* About Section */}
+      <section id="about" style={{
+        minHeight: '100vh',
+        padding: '8rem 2rem 4rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div style={{ maxWidth: '1200px', width: '100%' }}>
+          <h2 style={{
+            fontSize: 'clamp(2.5rem, 6vw, 4rem)',
+            fontWeight: 'bold',
+            marginBottom: '3rem',
+            textAlign: 'center'
+          }}>
+            About Me
+          </h2>
+          
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: '4rem',
+            alignItems: 'center'
+          }}>
+            <div>
+              <p style={{
+                fontSize: '1.2rem',
+                color: isDarkMode ? '#ccc' : '#555',
+                lineHeight: '1.8',
+                marginBottom: '2rem'
+              }}>
+                I'm a passionate Data Science enthusiast with a focus on LLMs and Machine Learning. 
+                I love exploring the intersection of AI and practical applications while building automation scripts and diving deep into DSA.
+              </p>
+              <p style={{
+                fontSize: '1.2rem',
+                color: isDarkMode ? '#ccc' : '#555',
+                lineHeight: '1.8'
+              }}>
+                With expertise in Python, ML algorithms, and DevOps practices, I create data-driven solutions 
+                and intelligent systems. I also bring a creative touch through graphic design to make technology more accessible.
+              </p>
+            </div>
+            
+            {/* Tech Stack */}
+            <div>
+              <h3 style={{
+                fontSize: '1.5rem',
+                fontWeight: 'bold',
+                marginBottom: '2rem',
+                color: isDarkMode ? '#fff' : '#000'
+              }}>
+                My Dev Gear
+              </h3>
+              
+              {/* Categories */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                {[
+                  {
+                    title: 'AI/ML & Data Science',
+                    items: ['Python', 'PyTorch', 'TensorFlow', 'Scikit-learn', 'Pandas', 'NumPy', 'Jupyter']
+                  },
+                  {
+                    title: 'AI & LLM Technologies',
+                    items: ['LangChain', 'ChromaDB', 'Gemini API', 'RAG Systems', 'Vector Embeddings']
+                  },
+                  {
+                    title: 'Web Development & UI',
+                    items: ['JavaScript', 'React', 'Streamlit', 'Beautiful Soup']
+                  },
+                  {
+                    title: 'Data Visualization',
+                    items: ['Matplotlib', 'Seaborn', 'Plotly']
+                  },
+                  {
+                    title: 'Cloud, DevOps & Tools',
+                    items: ['Docker', 'Linux', 'Git', 'Bash']
+                  },
+                  {
+                    title: 'Databases & Storage',
+                    items: ['MySQL', 'Vector Databases']
+                  },
+                  {
+                    title: 'Styling & Design',
+                    items: ['Tailwind CSS', 'CSS3']
+                  }
+                ].map((category, index) => (
+                  <div key={index}>
+                    <h4 style={{
+                      fontSize: '1rem',
+                      fontWeight: '600',
+                      color: isDarkMode ? '#888' : '#666',
+                      marginBottom: '0.5rem',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.1em'
+                    }}>
+                      {category.title}
+                    </h4>
+                    <div style={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: '0.5rem'
+                    }}>
+                      {category.items.map((item, itemIndex) => (
+                        <span key={itemIndex} style={{
+                          padding: '0.25rem 0.75rem',
+                          backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+                          borderRadius: '12px',
+                          fontSize: '0.875rem',
+                          color: isDarkMode ? '#fff' : '#000'
+                        }}>
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          {/* Scroll to Projects Button */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '4rem'
+          }}>
+            <button
+              onClick={() => scrollToSection('projects')}
+              style={{
+                padding: '12px 24px',
+                backgroundColor: 'transparent',
+                border: `2px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)'}`,
+                borderRadius: '8px',
+                color: isDarkMode ? '#fff' : '#000',
+                fontSize: '1rem',
+                fontWeight: '600',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+                e.target.style.borderColor = isDarkMode ? '#fff' : '#000';
+                e.target.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'transparent';
+                e.target.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)';
+                e.target.style.transform = 'translateY(0)';
+              }}
+            >
+              View Projects
+              <span style={{ fontSize: '1.2rem', marginLeft: '0.25rem' }}>↓</span>
+            </button>
+          </div>
+        </div>
+      </section>
 
+      {/* Projects Section */}
+      <section id="projects" style={{
+        minHeight: '100vh',
+        padding: '8rem 2rem 4rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div style={{ maxWidth: '1200px', width: '100%' }}>
+          <h2 style={{
+            fontSize: 'clamp(2.5rem, 6vw, 4rem)',
+            fontWeight: 'bold',
+            marginBottom: '3rem',
+            textAlign: 'center'
+          }}>
+            Selected Projects
+          </h2>
+          
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+            gap: '2rem'
+          }}>
+            {[
+              {
+                title: 'ZenAI - Medical RAG Chatbot',
+                description: 'A domain-specific medical chatbot using Retrieval-Augmented Generation (RAG) to provide accurate, document-grounded answers from a custom medical reference PDF.',
+                tech: ['Python', 'Streamlit', 'ChromaDB', 'Gemini API', 'LangChain'],
+                github: 'https://github.com/shravanramakunja/ZenAI'
+              },
+              {
+                title: 'AlgoSphere - ML Projects',
+                description: 'Comprehensive machine learning implementations featuring Linear & Logistic Regression with complete EDA, preprocessing, and evaluation using real-world datasets.',
+                tech: ['Python', 'Pandas', 'NumPy', 'Scikit-learn', 'Seaborn', 'Matplotlib'],
+                github: 'https://github.com/shravanramakunja/AlgoSphere'
+              },
+              {
+                title: 'BriefBot - Website Summarizer',
+                description: 'AI-powered tool that automatically extracts and summarizes website content using Beautiful Soup for web scraping and Google Gemini AI for intelligent summarization.',
+                tech: ['Python', 'Beautiful Soup', 'Gemini API', 'Streamlit'],
+                github: 'https://github.com/shravanramakunja/BreifBot'
+              },
+            ].map((project, index) => (
+              <div key={index} style={{
+                backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
+                border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`,
+                borderRadius: '12px',
+                padding: '2rem',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.transform = 'translateY(-5px)';
+                e.target.style.backgroundColor = isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.transform = 'translateY(0)';
+                e.target.style.backgroundColor = isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
+              }}
+              >
+                <h3 style={{
+                  fontSize: '1.5rem',
+                  fontWeight: 'bold',
+                  marginBottom: '1rem',
+                  color: isDarkMode ? '#fff' : '#000'
+                }}>
+                  {project.title}
+                </h3>
+                
+                <p style={{
+                  color: isDarkMode ? '#ccc' : '#666',
+                  lineHeight: '1.6',
+                  marginBottom: '1.5rem'
+                }}>
+                  {project.description}
+                </p>
+                
+                <div style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '0.5rem',
+                  marginBottom: '1.5rem'
+                }}>
+                  {project.tech.map((tech, techIndex) => (
+                    <span key={techIndex} style={{
+                      padding: '0.25rem 0.75rem',
+                      backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+                      borderRadius: '12px',
+                      fontSize: '0.875rem',
+                      color: isDarkMode ? '#fff' : '#000'
+                    }}>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" style={{
+                    color: isDarkMode ? '#888' : '#666',
+                    textDecoration: 'none',
+                    fontSize: '0.9rem',
+                    transition: 'color 0.3s ease'
+                  }}
+                  onMouseEnter={(e) => e.target.style.color = isDarkMode ? '#fff' : '#000'}
+                  onMouseLeave={(e) => e.target.style.color = isDarkMode ? '#888' : '#666'}
+                  >
+                    GitHub →
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
+      {/* Connect Section */}
+      <section 
+        id="connect" 
+        style={{ 
+          padding: '100px 20px 60px',
+          borderTop: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`
+        }}
+      >
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <h2 style={{ 
+            fontSize: '2rem',
+            fontWeight: '600',
+            marginBottom: '20px',
+            color: isDarkMode ? '#fff' : '#000'
+          }}>
+            Connect
+          </h2>
+          
+          <p style={{ 
+            fontSize: '1.1rem',
+            color: isDarkMode ? '#ccc' : '#555',
+            marginBottom: '30px'
+          }}>
+            Feel free to contact me at <a 
+              href="mailto:your@email.com" 
+              style={{ 
+                color: isDarkMode ? '#fff' : '#000',
+                textDecoration: 'underline'
+              }}
+            >
+              your@email.com
+            </a>
+          </p>
+          
+          <div style={{ 
+            display: 'flex', 
+            gap: '20px',
+            marginBottom: '40px',
+            flexWrap: 'wrap'
+          }}>
+            <a 
+              href="https://github.com/shravan-ramakunja" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ 
+                padding: '8px 16px',
+                backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+                borderRadius: '6px',
+                textDecoration: 'none',
+                color: isDarkMode ? '#fff' : '#000',
+                fontSize: '14px',
+                fontWeight: '500',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              Github ↗
+            </a>
+            
+            <a 
+              href="https://twitter.com/shravan-ramakunja" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ 
+                padding: '8px 16px',
+                backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+                borderRadius: '6px',
+                textDecoration: 'none',
+                color: isDarkMode ? '#fff' : '#000',
+                fontSize: '14px',
+                fontWeight: '500',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              Twitter ↗
+            </a>
+            
+            <a 
+              href="https://linkedin.com/in/shravan-ramakunja" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ 
+                padding: '8px 16px',
+                backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+                borderRadius: '6px',
+                textDecoration: 'none',
+                color: isDarkMode ? '#fff' : '#000',
+                fontSize: '14px',
+                fontWeight: '500',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              LinkedIn ↗
+            </a>
+            
+            <a 
+              href="https://instagram.com/_shravaan" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ 
+                padding: '8px 16px',
+                backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+                borderRadius: '6px',
+                textDecoration: 'none',
+                color: isDarkMode ? '#fff' : '#000',
+                fontSize: '14px',
+                fontWeight: '500',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              Instagram ↗
+            </a>
+          </div>
 
-
-<div style={{ height: '600px', position: 'relative' }}>
-  <CircularGallery bend={3} textColor="#ffffff" borderRadius={0.05} />
-</div>
-
-
-<div
-id="variable-proximity-section"
-ref={containerRef}
-style={{position: 'relative', height: '300px', padding: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}
-className="variable-proximity-container"
->
-  <VariableProximity
-    label={'Connect with me'}
-    className={'variable-proximity-demo text-white font-bold text-6xl'}
-    fromFontVariationSettings="'wght' 300"
-    toFontVariationSettings="'wght' 900"
-    containerRef={containerRef}
-    radius={150}
-    falloff='exponential'
-  />
-</div>
-
-{/* Crosshair Component */}
-<div className="crosshair-container" style={{ height: '400px', position: 'relative', backgroundColor: 'transparent', marginTop: '30px', zIndex: 1000 }}>
-  <div ref={containerRef} style={{ height: '400px', overflow: 'hidden', position: 'relative' }}>
-    <Crosshair containerRef={containerRef} color='#ffffff'/>
-  </div>
-</div>
-
-{/* BlurText between Crosshair and FallingText */}
-<div className="relative flex justify-center items-center py-8">
-  <BlurText
-    text=""
-    delay={150}
-    animateBy="words"
-    direction="top"
-    className="text-white text-5xl font-bold text-center"
-  />
-</div>
-
-{/* Scroll Down Indicator */}
-<div className="relative flex flex-col justify-center items-center py-6">
-  <BlurText
-    text="Scroll Down"
-    delay={200}
-    animateBy="words"
-    direction="top"
-    className="text-white text-3xl font-bold text-center mb-4"
-  />
-  <div className="animate-bounce">
-    <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-      <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
+          {/* Footer with Theme Toggle */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingTop: '40px',
+            borderTop: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`
+          }}>
+            <p style={{
+              fontSize: '14px',
+              color: isDarkMode ? '#666' : '#888'
+            }}>
+              © 2025 Shravan Ramakunja.
+            </p>
+            
+            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+              <button 
+                onClick={toggleTheme}
+                style={{ 
+                  width: '40px',
+                  height: '40px',
+                  backgroundColor: 'transparent',
+                  border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)'}`,
+                  borderRadius: '50%',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '18px',
+                  color: isDarkMode ? '#fff' : '#000'
+                }}
+              >
+                ☀
+              </button>
+              
+              <button 
+                onClick={toggleTheme}
+                style={{ 
+                  width: '40px',
+                  height: '40px',
+                  backgroundColor: 'transparent',
+                  border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)'}`,
+                  borderRadius: '50%',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '18px',
+                  color: isDarkMode ? '#fff' : '#000'
+                }}
+              >
+                🌙
+              </button>
+              
+              <button 
+                style={{ 
+                  width: '40px',
+                  height: '40px',
+                  backgroundColor: 'transparent',
+                  border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)'}`,
+                  borderRadius: '50%',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '18px',
+                  color: isDarkMode ? '#fff' : '#000'
+                }}
+              >
+                💬
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-  </div>
-</div>
-
-{/* FallingText with proper container and spacing */}
-<div className="falling-text-container" style={{ height: '400px', position: 'relative', marginTop: '50px', padding: '20px', color: '#ffffff' }}>
-  <FallingText
-    text={`Made using Reactbits.dev .`}
-    highlightWords={["React", "Bits", "animated", "components", "simplify"]}
-    highlightClass="highlighted"
-    trigger="scroll"
-    backgroundColor="transparent"
-    wireframes={false}
-    gravity={0.56}
-    fontSize="2rem"
-    mouseConstraintStiffness={0.9}
-    style={{ color: '#ffffff' }}
-  />
-</div>
-
-    </>
   );
 }
 
