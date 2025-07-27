@@ -53,6 +53,55 @@ const globalStyles = `
       opacity: 0;
     }
   }
+  
+  @media (max-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr !important;
+      gap: 2rem !important;
+    }
+    
+    .timeline-container {
+      padding: 0 1rem;
+    }
+    
+    .timeline-line {
+      left: 20px !important;
+      transform: none !important;
+    }
+    
+    .timeline-item {
+      flex-direction: column !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+    
+    .timeline-dot {
+      position: relative !important;
+      left: auto !important;
+      transform: none !important;
+      margin-bottom: 1rem;
+    }
+    
+    .timeline-card {
+      width: 100% !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .timeline-line {
+      display: none !important;
+    }
+    
+    .timeline-card {
+      padding: 1.5rem !important;
+    }
+    
+    .timeline-title {
+      font-size: 1.1rem !important;
+    }
+  }
 `;
 
 // Inject styles into document head
@@ -363,12 +412,15 @@ function App() {
             About Me
           </h2>
           
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '4rem',
-            alignItems: 'center'
-          }}>
+          <div 
+            className="about-grid"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '4rem',
+              alignItems: 'center'
+            }}
+          >
             <div>
               <p style={{
                 fontSize: '1.2rem',
@@ -525,21 +577,27 @@ function App() {
           </h2>
           
           {/* Timeline Container */}
-          <div style={{
-            position: 'relative',
-            maxWidth: '800px',
-            margin: '0 auto'
-          }}>
-            {/* Timeline Line */}
-            <div style={{
-              position: 'absolute',
-              left: '50%',
-              top: '0',
-              bottom: '0',
-              width: '2px',
-              backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)',
-              transform: 'translateX(-50%)'
-            }} />
+          <div 
+            className="timeline-container"
+            style={{
+              position: 'relative',
+              maxWidth: '800px',
+              margin: '0 auto'
+            }}
+          >
+            {/* Timeline Line - Hidden on mobile */}
+            <div 
+              className="timeline-line"
+              style={{
+                position: 'absolute',
+                left: '50%',
+                top: '0',
+                bottom: '0',
+                width: '2px',
+                backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)',
+                transform: 'translateX(-50%)'
+              }} 
+            />
             
             {/* Timeline Items */}
             <div style={{
@@ -549,33 +607,43 @@ function App() {
             }}>
               
               {/* GirlScript Summer Of Code 2025 */}
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                position: 'relative'
-              }}>
-                {/* Timeline Dot */}
-                <div style={{
-                  position: 'absolute',
-                  left: '50%',
-                  width: '16px',
-                  height: '16px',
-                  backgroundColor: isDarkMode ? '#fff' : '#000',
-                  borderRadius: '50%',
-                  transform: 'translateX(-50%)',
-                  zIndex: 2
-                }} />
-                
-                {/* Content Card - Right Side */}
-                <div style={{
-                  width: '45%',
-                  marginLeft: '55%',
-                  backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
-                  border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`,
-                  borderRadius: '12px',
-                  padding: '2rem',
-                  transition: 'all 0.3s ease'
+              <div 
+                className="timeline-item"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  position: 'relative',
+                  flexDirection: 'row'
                 }}
+              >
+                {/* Timeline Dot */}
+                <div 
+                  className="timeline-dot"
+                  style={{
+                    position: 'absolute',
+                    left: '50%',
+                    width: '16px',
+                    height: '16px',
+                    backgroundColor: isDarkMode ? '#fff' : '#000',
+                    borderRadius: '50%',
+                    transform: 'translateX(-50%)',
+                    zIndex: 2
+                  }} 
+                />
+                
+                {/* Content Card */}
+                <div 
+                  className="timeline-card"
+                  style={{
+                    width: '45%',
+                    marginLeft: '55%',
+                    marginRight: '0',
+                    backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
+                    border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`,
+                    borderRadius: '12px',
+                    padding: '2rem',
+                    transition: 'all 0.3s ease'
+                  }}
                 onMouseEnter={(e) => {
                   e.target.style.transform = 'translateY(-5px)';
                   e.target.style.backgroundColor = isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)';
@@ -592,12 +660,15 @@ function App() {
                   }}>
                     2025
                   </div>
-                  <h3 style={{
-                    fontSize: '1.3rem',
-                    fontWeight: 'bold',
-                    marginBottom: '0.5rem',
-                    color: isDarkMode ? '#fff' : '#000'
-                  }}>
+                  <h3 
+                    className="timeline-title"
+                    style={{
+                      fontSize: '1.3rem',
+                      fontWeight: 'bold',
+                      marginBottom: '0.5rem',
+                      color: isDarkMode ? '#fff' : '#000'
+                    }}
+                  >
                     GirlScript Summer Of Code 2025
                   </h3>
                   <p style={{
@@ -637,31 +708,41 @@ function App() {
               </div>
 
               {/* Design Sub Lead at Nova Innovative Compskey */}
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                position: 'relative'
-              }}>
+              <div 
+                className="timeline-item"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  position: 'relative',
+                  flexDirection: 'row'
+                }}
+              >
                 {/* Timeline Dot */}
-                <div style={{
-                  position: 'absolute',
-                  left: '50%',
-                  width: '16px',
-                  height: '16px',
-                  backgroundColor: isDarkMode ? '#fff' : '#000',
-                  borderRadius: '50%',
-                  transform: 'translateX(-50%)',
-                  zIndex: 2
-                }} />
+                <div 
+                  className="timeline-dot"
+                  style={{
+                    position: 'absolute',
+                    left: '50%',
+                    width: '16px',
+                    height: '16px',
+                    backgroundColor: isDarkMode ? '#fff' : '#000',
+                    borderRadius: '50%',
+                    transform: 'translateX(-50%)',
+                    zIndex: 2
+                  }} 
+                />
                 
-                {/* Content Card - Left Side */}
-                <div style={{
-                  width: '45%',
-                  marginRight: '55%',
-                  backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
+                {/* Content Card */}
+                <div 
+                  className="timeline-card"
+                  style={{
+                    width: '45%',
+                    marginRight: '55%',
+                    marginLeft: '0',
+                    backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
                   border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`,
                   borderRadius: '12px',
-                  padding: '2rem',
+                  padding: window.innerWidth <= 480 ? '1.5rem' : '2rem',
                   transition: 'all 0.3s ease'
                 }}
                 onMouseEnter={(e) => {
@@ -680,12 +761,15 @@ function App() {
                   }}>
                     Nov 2024 - Present • 9 mos
                   </div>
-                  <h3 style={{
-                    fontSize: '1.3rem',
-                    fontWeight: 'bold',
-                    marginBottom: '0.5rem',
-                    color: isDarkMode ? '#fff' : '#000'
-                  }}>
+                  <h3 
+                    className="timeline-title"
+                    style={{
+                      fontSize: '1.3rem',
+                      fontWeight: 'bold',
+                      marginBottom: '0.5rem',
+                      color: isDarkMode ? '#fff' : '#000'
+                    }}
+                  >
                     Design Sub Lead
                   </h3>
                   <p style={{
