@@ -8,7 +8,7 @@ const Connect = ({ isDarkMode, toggleTheme }) => {
     },
     {
       name: 'Twitter',
-      url: 'https://twitter.com/shravan-ramakunja'
+      url: 'https://twitter.com/sniperkraken007'
     },
     {
       name: 'LinkedIn',
