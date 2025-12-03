@@ -3,7 +3,7 @@ import React from 'react';
 const Experience = ({ isDarkMode }) => {
   const experiences = [
     {
-      year: '2025 - Present',
+      year: '2024 - Present',
       title: 'President',
       role: 'Nova Innovative Compskey (NIC) • Bangalore',
       description: 'Leading Nova Innovative Compskey as President, driving innovation and fostering a collaborative environment for engineering students. Overseeing club operations, coordinating technical events, and mentoring teams to build impactful projects.',

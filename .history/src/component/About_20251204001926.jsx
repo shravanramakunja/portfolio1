@@ -4,7 +4,7 @@ const About = ({ isDarkMode, scrollToSection }) => {
   const techCategories = [
     {
       title: 'AI/ML & Data Science',
-      items: ['Python',  'TensorFlow', 'Scikit-learn', 'Pandas', 'NumPy', 'Jupyter']
+      items: ['Python', 'PyTorch', 'TensorFlow', 'Scikit-learn', 'Pandas', 'NumPy', 'Jupyter']
     },
     {
       title: 'AI & LLM Technologies',
@@ -12,7 +12,7 @@ const About = ({ isDarkMode, scrollToSection }) => {
     },
     {
       title: 'Web Development & UI',
-      items: ['Express.js' ,'React', 'Streamlit', 'Beautiful Soup',]
+      items: ['JavaScript', 'Express.js' ,'React', 'Streamlit', 'Beautiful Soup',]
     },
     {
       title: 'Data Visualization',
@@ -24,7 +24,7 @@ const About = ({ isDarkMode, scrollToSection }) => {
     },
     {
       title: 'Databases & Storage',
-      items: ['MySQL', 'Vector Databases','MongoDB']
+      items: ['MySQL', 'Vector Databases']
     },
     {
       title: 'Styling & Design',
@@ -66,18 +66,16 @@ const About = ({ isDarkMode, scrollToSection }) => {
               lineHeight: '1.8',
               marginBottom: '2rem'
             }}>
-              I'm a passionate Machine Learning enthusiast and software developer focused on building innovative AI solutions. 
-              Currently pursuing my B.Tech in Computer Science and Engineering at Dayananda Sagar College of Engineering, 
-              I specialize in LLMs, Gen AI, and creating intelligent systems that solve real-world problems.
+              I'm a passionate Machine Learning enthusiast with a focus on LLMs and Gen AI tools. 
+              I love exploring the intersection of AI and practical applications while building automation scripts and diving deep into DSA.
             </p>
             <p style={{
               fontSize: '1.2rem',
               color: isDarkMode ? '#ccc' : '#555',
               lineHeight: '1.8'
             }}>
-              As President of Nova Innovative Compskey (NIC), I lead a community of innovators and tech enthusiasts. 
-              With hands-on experience in Python, machine learning algorithms, and full-stack development, I've built 
-              award-winning projects like FinSightAI (2nd place at Innovex Project Expo), RAG-based chatbots, and ML automation tools.
+              With expertise in Python, ML algorithms, and DevOps practices, I create data-driven solutions 
+              and intelligent systems. I also bring a creative touch through graphic design to make technology more accessible.
             </p>
           </div>
           

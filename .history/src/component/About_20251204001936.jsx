@@ -4,7 +4,7 @@ const About = ({ isDarkMode, scrollToSection }) => {
   const techCategories = [
     {
       title: 'AI/ML & Data Science',
-      items: ['Python',  'TensorFlow', 'Scikit-learn', 'Pandas', 'NumPy', 'Jupyter']
+      items: ['Python', 'PyTorch', 'TensorFlow', 'Scikit-learn', 'Pandas', 'NumPy', 'Jupyter']
     },
     {
       title: 'AI & LLM Technologies',
@@ -12,7 +12,7 @@ const About = ({ isDarkMode, scrollToSection }) => {
     },
     {
       title: 'Web Development & UI',
-      items: ['Express.js' ,'React', 'Streamlit', 'Beautiful Soup',]
+      items: [='Express.js' ,'React', 'Streamlit', 'Beautiful Soup',]
     },
     {
       title: 'Data Visualization',
@@ -24,7 +24,7 @@ const About = ({ isDarkMode, scrollToSection }) => {
     },
     {
       title: 'Databases & Storage',
-      items: ['MySQL', 'Vector Databases','MongoDB']
+      items: ['MySQL', 'Vector Databases']
     },
     {
       title: 'Styling & Design',

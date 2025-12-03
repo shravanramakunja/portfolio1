@@ -4,7 +4,7 @@ const About = ({ isDarkMode, scrollToSection }) => {
   const techCategories = [
     {
       title: 'AI/ML & Data Science',
-      items: ['Python',  'TensorFlow', 'Scikit-learn', 'Pandas', 'NumPy', 'Jupyter']
+      items: ['Python', 'PyTorch', 'TensorFlow', 'Scikit-learn', 'Pandas', 'NumPy', 'Jupyter']
     },
     {
       title: 'AI & LLM Technologies',
@@ -12,7 +12,7 @@ const About = ({ isDarkMode, scrollToSection }) => {
     },
     {
       title: 'Web Development & UI',
-      items: ['Express.js' ,'React', 'Streamlit', 'Beautiful Soup',]
+      items: ['JavaScript', 'React', 'Streamlit', 'Beautiful Soup']
     },
     {
       title: 'Data Visualization',
@@ -24,7 +24,7 @@ const About = ({ isDarkMode, scrollToSection }) => {
     },
     {
       title: 'Databases & Storage',
-      items: ['MySQL', 'Vector Databases','MongoDB']
+      items: ['MySQL', 'Vector Databases']
     },
     {
       title: 'Styling & Design',
@@ -75,9 +75,9 @@ const About = ({ isDarkMode, scrollToSection }) => {
               color: isDarkMode ? '#ccc' : '#555',
               lineHeight: '1.8'
             }}>
-              As President of Nova Innovative Compskey (NIC), I lead a community of innovators and tech enthusiasts. 
               With hands-on experience in Python, machine learning algorithms, and full-stack development, I've built 
-              award-winning projects like FinSightAI (2nd place at Innovex Project Expo), RAG-based chatbots, and ML automation tools.
+              RAG-based chatbots, ML models, and automation tools. As Design Sub Lead at Nova Innovative Compskey, 
+              I combine technical expertise with creative design to deliver impactful solutions.
             </p>
           </div>
           

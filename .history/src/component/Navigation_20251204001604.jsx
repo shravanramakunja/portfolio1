@@ -33,7 +33,6 @@ const Navigation = ({ activeSection, isDarkMode, scrollToSection }) => {
             { name: 'About', id: 'about' },
             { name: 'Experience', id: 'experience' },
             { name: 'Projects', id: 'projects' },
-            { name: 'Rewards', id: 'rewards' },
             { name: 'Connect', id: 'connect' }
           ].map((item) => (
             <button

@@ -7,7 +7,6 @@ import Hero from './component/Hero';
 import About from './component/About';
 import Experience from './component/Experience';
 import Projects from './component/Projects';
-import Rewards from './component/Rewards';
 import Connect from './component/Connect';
 import { injectGlobalStyles } from './component/GlobalStyles';
 import { scrollToSection, phrases } from './component/utils';
@@ -23,7 +22,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'experience', 'projects', 'rewards', 'connect'];
+      const sections = ['home', 'about', 'experience', 'projects', 'connect'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -106,10 +105,6 @@ function App() {
       />
       
       <Projects 
-        isDarkMode={isDarkMode}
-      />
-      
-      <Rewards 
         isDarkMode={isDarkMode}
       />
       
