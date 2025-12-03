@@ -67,7 +67,7 @@ const About = ({ isDarkMode, scrollToSection }) => {
               marginBottom: '2rem'
             }}>
               I'm a passionate Machine Learning enthusiast and software developer focused on building innovative AI solutions. 
-              Currently pursuing my B.Tech in Computer Science and Engineering at  College of MVJ College of Engineering, 
+              Currently pursuing my B.Tech in Computer Science and Engineering at  College of NIC gineering, 
               I specialize in LLMs, Gen AI, and creating intelligent systems that solve real-world problems.
             </p>
             <p style={{
