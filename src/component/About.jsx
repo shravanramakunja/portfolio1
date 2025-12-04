@@ -1,170 +1,97 @@
 import React from 'react';
+import ScrollReveal from './ScrollReveal';
 
-const About = ({ isDarkMode, scrollToSection }) => {
-  const techCategories = [
-    {
-      title: 'AI/ML & Data Science',
-      items: ['Python',  'TensorFlow', 'Scikit-learn', 'Pandas', 'NumPy', 'Jupyter']
-    },
-    {
-      title: 'AI & LLM Technologies',
-      items: ['LangChain', 'ChromaDB', 'Gemini API', 'RAG Systems', 'Vector Embeddings']
-    },
-    {
-      title: 'Web Development & UI',
-      items: ['Express.js' ,'React', 'Streamlit', 'Beautiful Soup',]
-    },
-    {
-      title: 'Data Visualization',
-      items: ['Matplotlib', 'Seaborn', 'Plotly']
-    },
-    {
-      title: 'Cloud, DevOps & Tools',
-      items: ['Docker', 'Linux', 'Git', 'Bash']
-    },
-    {
-      title: 'Databases & Storage',
-      items: ['MySQL', 'Vector Databases','MongoDB']
-    },
-    {
-      title: 'Styling & Design',
-      items: ['Tailwind CSS', 'CSS3']
-    }
-  ];
-
+const About = () => {
   return (
-    <section id="about" style={{
-      minHeight: '100vh',
-      padding: '8rem 2rem 4rem',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
-      <div style={{ maxWidth: '1200px', width: '100%' }}>
-        <h2 style={{
-          fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-          fontWeight: 'bold',
-          marginBottom: '3rem',
-          textAlign: 'center'
-        }}>
-          About Me
-        </h2>
-        
-        <div 
-          className="about-grid"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '4rem',
-            alignItems: 'center'
-          }}
-        >
-          <div>
-            <p style={{
-              fontSize: '1.2rem',
-              color: isDarkMode ? '#ccc' : '#555',
-              lineHeight: '1.8',
-              marginBottom: '2rem'
-            }}>
-              I'm a passionate Machine Learning enthusiast and software developer focused on building innovative AI solutions. 
-              Currently pursuing my B.Tech in Computer Science and Engineering at  College of MVJ College of Engineering, 
-              I specialize in LLMs, Gen AI, and creating intelligent systems that solve real-world problems.
-            </p>
-            <p style={{
-              fontSize: '1.2rem',
-              color: isDarkMode ? '#ccc' : '#555',
-              lineHeight: '1.8'
-            }}>
-              As President of Nova Innovative Compskey (NIC), I lead a community of innovators and tech enthusiasts. 
-              With hands-on experience in Python, machine learning algorithms, and full-stack development, I've built 
-              award-winning projects like FinSightAI (2nd place at Innovex Project Expo), RAG-based chatbots, and ML automation tools.
-            </p>
+    <section id="about" className="py-16 relative bg-page">
+      <div className="container mx-auto px-6 mb-20">
+        <ScrollReveal>
+          <div className="flex justify-between items-end mb-16">
+            <h2 className="font-display text-4xl font-bold text-primary uppercase tracking-tight">Capabilities</h2>
+            <span className="text-secondary hidden md:block text-sm font-mono">01 // SKILLS</span>
           </div>
-          
-          {/* Tech Stack */}
-          <div>
-            <h3 style={{
-              fontSize: '1.5rem',
-              fontWeight: 'bold',
-              marginBottom: '2rem',
-              color: isDarkMode ? '#fff' : '#000'
-            }}>
-              My Dev Gear
-            </h3>
-            
-            {/* Categories */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-              {techCategories.map((category, index) => (
-                <div key={index}>
-                  <h4 style={{
-                    fontSize: '1rem',
-                    fontWeight: '600',
-                    color: isDarkMode ? '#888' : '#666',
-                    marginBottom: '0.5rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.1em'
-                  }}>
-                    {category.title}
-                  </h4>
-                  <div style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: '0.5rem'
-                  }}>
-                    {category.items.map((item, itemIndex) => (
-                      <span key={itemIndex} style={{
-                        padding: '0.25rem 0.75rem',
-                        backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
-                        borderRadius: '12px',
-                        fontSize: '0.875rem',
-                        color: isDarkMode ? '#fff' : '#000'
-                      }}>
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[minmax(200px,auto)]">
+
+          {/* Main Bio */}
+          <ScrollReveal className="md:col-span-2 lg:col-span-2 row-span-2">
+            <div className="bento-card p-10 flex flex-col justify-between h-full">
+              <div>
+                <i className="fas fa-cube text-4xl text-primary mb-8"></i>
+                <h3 className="font-display text-3xl font-bold text-primary mb-6 uppercase">The Intersection</h3>
+                <p className="text-secondary leading-relaxed text-lg font-light">
+                  I don't just write code; I construct systems. Bridging the gap between raw machine learning logic and fluid, responsive user interfaces. My work is defined by precision and scalability.
+                </p>
+              </div>
+              <div className="mt-8 pt-8 border-t border-border flex justify-between items-end">
+                <span className="text-xs uppercase tracking-widest text-secondary">Based in India</span>
+                <i className="fas fa-arrow-right -rotate-45 text-primary"></i>
+              </div>
             </div>
-          </div>
-        </div>
-        
-        {/* Scroll to Experience Button */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          marginTop: '4rem'
-        }}>
-          <button
-            onClick={() => scrollToSection('experience')}
-            style={{
-              padding: '12px 24px',
-              backgroundColor: 'transparent',
-              border: `2px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)'}`,
-              borderRadius: '8px',
-              color: isDarkMode ? '#fff' : '#000',
-              fontSize: '1rem',
-              fontWeight: '600',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.backgroundColor = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
-              e.target.style.borderColor = isDarkMode ? '#fff' : '#000';
-              e.target.style.transform = 'translateY(-2px)';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.backgroundColor = 'transparent';
-              e.target.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)';
-              e.target.style.transform = 'translateY(0)';
-            }}
-          >
-            View Experience
-            <span style={{ fontSize: '1.2rem', marginLeft: '0.25rem' }}>↓</span>
-          </button>
+          </ScrollReveal>
+
+          {/* Frontend */}
+          <ScrollReveal delay={100}>
+            <div className="bento-card p-8 flex flex-col justify-center h-full hover-trigger" data-cursor="link">
+              <h4 className="font-display font-bold text-primary text-xl mb-2">FRONTEND</h4>
+              <ul className="text-secondary text-sm space-y-2 font-mono mt-4">
+                <li>React.js</li>
+                <li>Framer</li>
+                <li>Tailwind CSS</li>
+                <li>Figma</li>
+              </ul>
+            </div>
+          </ScrollReveal>
+
+          {/* AI / ML */}
+          <ScrollReveal delay={200}>
+            <div className="bento-card p-8 flex flex-col justify-center h-full hover-trigger" data-cursor="link">
+              <h4 className="font-display font-bold text-primary text-xl mb-2">AI / ML</h4>
+              <ul className="text-secondary text-sm space-y-2 font-mono mt-4">
+                <li>Python</li>
+                <li>TensorFlow</li>
+                <li>PyTorch</li>
+                <li>OpenCV</li>
+              </ul>
+            </div>
+          </ScrollReveal>
+
+          {/* Stats */}
+          <ScrollReveal delay={300} className="md:col-span-2">
+            <div className="bento-card bg-primary text-primary p-10 flex items-center justify-between h-full border-border">
+              <div className="text-page">
+                <h3 className="text-6xl font-display font-bold mb-2">03<span className="text-xl align-top">+</span></h3>
+                <p className="text-page/60 text-xs uppercase tracking-widest font-bold">Years Exp</p>
+              </div>
+              <div className="h-16 w-px bg-page/20"></div>
+              <div className="text-page">
+                <h3 className="text-6xl font-display font-bold mb-2">20<span className="text-xl align-top">+</span></h3>
+                <p className="text-page/60 text-xs uppercase tracking-widest font-bold">Projects</p>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Backend */}
+          <ScrollReveal delay={400}>
+            <div className="bento-card p-8 flex flex-col justify-center h-full hover-trigger" data-cursor="link">
+              <h4 className="font-display font-bold text-primary text-xl mb-2">BACKEND</h4>
+              <ul className="text-secondary text-sm space-y-2 font-mono mt-4">
+                <li>Node.js</li>
+                <li>PostgreSQL</li>
+                <li>Docker / K8s</li>
+                <li>AWS</li>
+              </ul>
+            </div>
+          </ScrollReveal>
+
+          {/* GitHub Link */}
+          <ScrollReveal delay={500}>
+            <a href="https://github.com/shravanramakunja" target="_blank" rel="noopener noreferrer" className="bento-card bg-page p-8 flex flex-col items-center justify-center text-center group hover:bg-primary hover:text-page transition-colors h-full">
+              <i className="fab fa-github text-5xl mb-6 group-hover:scale-110 transition-transform text-primary group-hover:text-page"></i>
+              <span className="font-display font-bold text-sm uppercase tracking-widest text-primary group-hover:text-page">View Code</span>
+            </a>
+          </ScrollReveal>
         </div>
       </div>
     </section>

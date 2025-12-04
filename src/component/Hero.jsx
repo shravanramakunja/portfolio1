@@ -1,152 +1,39 @@
 import React from 'react';
-import LinkedInIcon from '../assets/linkedin-app-white-icon.svg';
-import GitHubIcon from '../assets/github-white-icon.svg';
-import ResumeFile from '../assets/Resume-Shravan.pdf';
+import MagneticButton from './MagneticButton';
+import ScrambleText from './ScrambleText';
+import ScrollReveal from './ScrollReveal';
 
-const Hero = ({ displayText, isDarkMode }) => {
+const Hero = () => {
   return (
-    <section 
-      id="home" 
-      className="hero-section"
-      style={{
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-        padding: '0 2rem'
-      }}
-    >
-      <div style={{ maxWidth: '800px' }}>
-        <h1 style={{
-          fontSize: 'clamp(3rem, 8vw, 6rem)',
-          fontWeight: 'bold',
-          marginBottom: '1rem',
-          lineHeight: '1.1'
-        }}>
-          Shravan Ramakunja
-        </h1>
-        <p style={{
-          fontSize: '1.5rem',
-          color: isDarkMode ? '#888' : '#555',
-          marginBottom: '3rem',
-          lineHeight: '1.4',
-          minHeight: '2.1rem'
-        }}>
-          {displayText}<span style={{ 
-            opacity: displayText.length > 0 ? 1 : 0,
-            animation: 'blink 1s infinite',
-            marginLeft: '2px'
-          }}>|</span>
-        </p>
-        
-        {/* Social Links */}
-        <div 
-          className="hero-social-links"
-          style={{
-            display: 'flex',
-            gap: '1.5rem',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-        >
-          <a 
-            href="https://github.com/shravanramakunja" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '50px',
-              height: '50px',
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
-              borderRadius: '50%',
-              transition: 'all 0.3s ease',
-              border: '1px solid rgba(255, 255, 255, 0.2)'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-              e.target.style.transform = 'translateY(-2px)';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-              e.target.style.transform = 'translateY(0)';
-            }}
-          >
-            <img 
-              src={GitHubIcon} 
-              alt="GitHub" 
-              style={{ 
-                width: '24px', 
-                height: '24px',
-                filter: 'brightness(0) invert(1)'
-              }} 
-            />
-          </a>
-          
-          <a 
-            href="https://www.linkedin.com/in/shravan-ramakunja-4b3a25291/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '50px',
-              height: '50px',
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
-              borderRadius: '50%',
-              transition: 'all 0.3s ease',
-              border: '1px solid rgba(255, 255, 255, 0.2)'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-              e.target.style.transform = 'translateY(-2px)';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-              e.target.style.transform = 'translateY(0)';
-            }}
-          >
-            <img 
-              src={LinkedInIcon} 
-              alt="LinkedIn" 
-              style={{ 
-                width: '24px', 
-                height: '24px',
-                filter: 'brightness(0) invert(1)'
-              }} 
-            />
-          </a>
+    <section className="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
+      <div className="absolute inset-0 bg-grid-pattern pointer-events-none"></div>
 
-          <a 
-            href={ResumeFile}
-            download="Shravan-Ramakunja-Resume.pdf"
-            style={{
-              padding: '12px 24px',
-              backgroundColor: 'transparent',
-              border: '2px solid #fff',
-              borderRadius: '8px',
-              color: '#fff',
-              textDecoration: 'none',
-              fontSize: '1rem',
-              fontWeight: '600',
-              transition: 'all 0.3s ease',
-              marginLeft: '1rem'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.backgroundColor = '#fff';
-              e.target.style.color = '#000';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.backgroundColor = 'transparent';
-              e.target.style.color = '#fff';
-            }}
-          >
-            Resume
-          </a>
+      <div className="container mx-auto px-6 text-center z-10">
+        <div className="inline-block mb-8 px-4 py-2 border border-border bg-card reveal active">
+          <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-primary">Status: Open for Work</span>
         </div>
+
+        <h1 className="font-display text-5xl md:text-7xl lg:text-9xl font-bold tracking-tighter mb-10 text-primary leading-none">
+          <ScrambleText text="SHRAVAN" className="scramble-text block" /><br />
+          <ScrambleText text="RAMAKUNJA" className="scramble-text block text-secondary" delay={200} />
+        </h1>
+
+        <ScrollReveal delay={200}>
+          <p className="max-w-xl mx-auto text-lg text-secondary mb-16 font-light">
+            Engineering the future with AI & Full Stack technologies. Minimalist code, maximalist impact.
+          </p>
+        </ScrollReveal>
+
+        <ScrollReveal delay={300}>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+            <MagneticButton href="#projects" className="px-10 py-4 bg-primary text-page font-display font-bold uppercase tracking-wider hover:opacity-90 transition-opacity hover-trigger" data-cursor="link">
+              Projects
+            </MagneticButton>
+            <MagneticButton href="https://www.linkedin.com/in/shravan-ramakunja-4b3a25291/" target="_blank" className="px-10 py-4 border border-border text-primary font-display font-bold uppercase tracking-wider hover:bg-card transition-colors hover-trigger" data-cursor="link">
+              LinkedIn
+            </MagneticButton>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

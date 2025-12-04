@@ -1,13 +1,14 @@
 import React from 'react';
+import ScrollReveal from './ScrollReveal';
 
-const Experience = ({ isDarkMode }) => {
+const Experience = () => {
   const experiences = [
     {
       year: '2025 - Present',
       title: 'President',
       role: 'Nova Innovative Compskey (NIC) • Bangalore',
       description: 'Leading Nova Innovative Compskey as President, driving innovation and fostering a collaborative environment for engineering students. Overseeing club operations, coordinating technical events, and mentoring teams to build impactful projects.',
-      skills: ['Leadership', 'Team Management', 'Event Planning', 'Mentorship'],
+      skills: ['Leadership', 'Event Planning', 'Mentorship'],
       side: 'right'
     },
     {
@@ -22,229 +23,89 @@ const Experience = ({ isDarkMode }) => {
       year: 'Nov 2024 - Present',
       title: 'Design Sub Lead',
       role: 'Nova Innovative Compskey • Bangalore',
-      description: 'Guide and supervise the club\'s design team in developing engineering project concepts and visual elements. Coordinate with fellow mates and the core leadership team to ensure project designs align with club objectives and technical standards.',
-      skills: ['Team Management', 'Canva', 'Design Leadership'],
+      description: 'Guide and supervise the club\'s design team in developing engineering project concepts and visual elements. Coordinate with fellow mates and the core leadership team.',
+      skills: ['Team Management', 'Canva', 'Design'],
       side: 'right'
     }
   ];
 
   return (
-    <section id="experience" style={{
-      minHeight: '100vh',
-      padding: '8rem 2rem 4rem',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
-      <div style={{ maxWidth: '1200px', width: '100%' }}>
-        <h2 style={{
-          fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-          fontWeight: 'bold',
-          marginBottom: '3rem',
-          textAlign: 'center'
-        }}>
-          Experience
-        </h2>
-        
-        {/* Timeline Container */}
-        <div 
-          className="timeline-container"
-          style={{
-            position: 'relative',
-            maxWidth: '800px',
-            margin: '0 auto'
-          }}
-        >
-          {/* Timeline Line */}
-          <div 
-            className="timeline-line"
-            style={{
-              position: 'absolute',
-              left: '50%',
-              top: '0',
-              bottom: '0',
-              width: '2px',
-              backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)',
-              transform: 'translateX(-50%)'
-            }} 
-          />
-          
-          {/* Timeline Items */}
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '3rem'
-          }}>
-            {experiences.map((exp, index) => (
-              <div 
-                key={index}
-                className="timeline-item"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  position: 'relative',
-                  flexDirection: 'row'
-                }}
-              >
-                {/* Timeline Dot */}
-                <div 
-                  className="timeline-dot"
-                  style={{
-                    position: 'absolute',
-                    left: '50%',
-                    width: '16px',
-                    height: '16px',
-                    backgroundColor: isDarkMode ? '#fff' : '#000',
-                    borderRadius: '50%',
-                    transform: 'translateX(-50%)',
-                    zIndex: 2
-                  }} 
-                />
-                
-                {/* Content Card */}
-                <div 
-                  className="timeline-card"
-                  style={{
-                    width: '45%',
-                    marginLeft: exp.side === 'right' ? '55%' : '0',
-                    marginRight: exp.side === 'left' ? '55%' : '0',
-                    backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
-                    border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`,
-                    borderRadius: '12px',
-                    padding: '2rem',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.transform = 'translateY(-5px)';
-                    e.target.style.backgroundColor = isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.transform = 'translateY(0)';
-                    e.target.style.backgroundColor = isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
-                  }}
-                >
-                  <div style={{
-                    fontSize: '0.9rem',
-                    color: isDarkMode ? '#888' : '#666',
-                    marginBottom: '0.5rem'
-                  }}>
-                    {exp.year}
+    <section id="experience" className="py-16 bg-page text-primary relative">
+      <div className="container mx-auto px-6 mb-20">
+        <ScrollReveal>
+          <div className="flex justify-between items-end">
+            <h2 className="font-display text-4xl md:text-5xl font-bold uppercase">Experience</h2>
+            <span className="text-secondary hidden md:block text-sm font-mono">02 // CAREER</span>
+          </div>
+        </ScrollReveal>
+      </div>
+
+      <div className="container mx-auto px-6 relative">
+        {/* Vertical Line */}
+        <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-border md:-translate-x-1/2"></div>
+
+        <div className="space-y-16">
+          {experiences.map((exp, index) => (
+            <ScrollReveal key={index} delay={index * 100}>
+              <div className={`relative flex flex-col ${exp.side === 'left' ? 'md:flex-row-reverse' : 'md:flex-row'} items-center`}>
+                {/* Dot */}
+                <div className="absolute left-6 md:left-1/2 w-4 h-4 bg-page border-2 border-primary rounded-full md:-translate-x-1/2 -translate-x-1/2 z-10"></div>
+
+                {/* Spacer */}
+                <div className="hidden md:block w-1/2"></div>
+
+                {/* Content */}
+                <div className={`w-full md:w-1/2 pl-12 ${exp.side === 'left' ? 'md:pr-16 md:pl-0 md:text-right' : 'md:pl-16'}`}>
+                  <div className="bento-card p-8 rounded-2xl hover-trigger" data-cursor="link">
+                    <span className="inline-block px-3 py-1 bg-page rounded-full text-xs font-mono text-secondary mb-4 border border-border">
+                      {exp.year}
+                    </span>
+                    <h3 className="font-display text-xl font-bold text-primary mb-1">{exp.title}</h3>
+                    <p className="text-sm font-medium text-secondary mb-4">{exp.role}</p>
+                    <p className="text-secondary text-sm leading-relaxed font-light mb-4">
+                      {exp.description}
+                    </p>
+
+                    {exp.skills && (
+                      <div className={`flex flex-wrap gap-2 ${exp.side === 'left' ? 'md:justify-end' : ''}`}>
+                        {exp.skills.map((skill, i) => (
+                          <span key={i} className="px-2 py-1 bg-page rounded text-[10px] text-secondary border border-border uppercase tracking-wide">
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    {exp.certificateLink && (
+                      <a
+                        href={exp.certificateLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs font-bold uppercase tracking-widest border-b border-primary pb-1 inline-block hover:text-secondary hover:border-secondary transition-colors text-primary"
+                      >
+                        View Certificate ↗
+                      </a>
+                    )}
                   </div>
-                  <h3 
-                    className="timeline-title"
-                    style={{
-                      fontSize: '1.3rem',
-                      fontWeight: 'bold',
-                      marginBottom: '0.5rem',
-                      color: isDarkMode ? '#fff' : '#000'
-                    }}
-                  >
-                    {exp.title}
-                  </h3>
-                  <p style={{
-                    fontSize: '1rem',
-                    color: isDarkMode ? '#888' : '#666',
-                    marginBottom: '1rem'
-                  }}>
-                    {exp.role}
-                  </p>
-                  <p style={{
-                    color: isDarkMode ? '#ccc' : '#666',
-                    lineHeight: '1.6',
-                    fontSize: '0.9rem',
-                    marginBottom: '1rem'
-                  }}>
-                    {exp.description}
-                  </p>
-                  
-                  {/* Skills */}
-                  {exp.skills && (
-                    <div style={{
-                      display: 'flex',
-                      flexWrap: 'wrap',
-                      gap: '0.5rem',
-                      marginBottom: '1rem'
-                    }}>
-                      {exp.skills.map((skill, skillIndex) => (
-                        <span key={skillIndex} style={{
-                          padding: '0.25rem 0.75rem',
-                          backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
-                          borderRadius: '12px',
-                          fontSize: '0.75rem',
-                          color: isDarkMode ? '#fff' : '#000'
-                        }}>
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                  
-                  {/* Certificate Link */}
-                  {exp.certificateLink && (
-                    <a 
-                      href={exp.certificateLink}
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      style={{
-                        display: 'inline-block',
-                        padding: '0.5rem 1rem',
-                        backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
-                        borderRadius: '6px',
-                        textDecoration: 'none',
-                        color: isDarkMode ? '#fff' : '#000',
-                        fontSize: '0.85rem',
-                        fontWeight: '500',
-                        transition: 'all 0.2s ease'
-                      }}
-                    >
-                      View Certificate →
-                    </a>
-                  )}
                 </div>
               </div>
-            ))}
+            </ScrollReveal>
+          ))}
+        </div>
+
+        <ScrollReveal delay={300}>
+          <div className="flex justify-center mt-20">
+            <a
+              href="https://www.linkedin.com/in/shravan-ramakunja-4b3a25291/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="magnetic-btn px-8 py-3 bg-transparent border border-border rounded-full text-xs font-bold uppercase tracking-widest text-primary hover:bg-primary hover:text-page transition-colors hover-trigger"
+              data-cursor="link"
+            >
+              View Full Profile on LinkedIn ↗
+            </a>
           </div>
-        </div>
-        
-        {/* LinkedIn Profile Link */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          marginTop: '3rem'
-        }}>
-          <a 
-            href="https://www.linkedin.com/in/shravan-ramakunja-4b3a25291/"
-            target="_blank" 
-            rel="noopener noreferrer"
-            style={{
-              padding: '12px 24px',
-              backgroundColor: 'transparent',
-              border: `2px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)'}`,
-              borderRadius: '8px',
-              color: isDarkMode ? '#fff' : '#000',
-              textDecoration: 'none',
-              fontSize: '1rem',
-              fontWeight: '600',
-              transition: 'all 0.3s ease',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.backgroundColor = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
-              e.target.style.borderColor = isDarkMode ? '#fff' : '#000';
-              e.target.style.transform = 'translateY(-2px)';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.backgroundColor = 'transparent';
-              e.target.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)';
-              e.target.style.transform = 'translateY(0)';
-            }}
-          >
-            View Full Profile on LinkedIn
-            <span style={{ fontSize: '1rem' }}>↗</span>
-          </a>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

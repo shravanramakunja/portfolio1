@@ -1,122 +1,52 @@
-import React, { useEffect, useState } from 'react';
-import './index.css';
-
-// Import components
+import React from 'react';
 import Navigation from './component/Navigation';
 import Hero from './component/Hero';
+import Marquee from './component/Marquee';
 import About from './component/About';
 import Experience from './component/Experience';
 import Projects from './component/Projects';
 import Rewards from './component/Rewards';
-import Connect from './component/Connect';
-import { injectGlobalStyles } from './component/GlobalStyles';
-import { scrollToSection, phrases } from './component/utils';
-
-// Inject global styles
-injectGlobalStyles();
+import MagneticButton from './component/MagneticButton';
+import ScrollReveal from './component/ScrollReveal';
+import CustomCursor from './component/CustomCursor';
 
 function App() {
-  const [activeSection, setActiveSection] = useState('home');
-  const [isDarkMode, setIsDarkMode] = useState(true);
-  const [displayText, setDisplayText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'about', 'experience', 'projects', 'rewards', 'connect'];
-      const scrollPosition = window.scrollY + 100;
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const offsetTop = element.offsetTop;
-          const offsetHeight = element.offsetHeight;
-
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const currentPhrase = phrases[currentIndex];
-    let charIndex = 0;
-    
-    const typeInterval = setInterval(() => {
-      if (charIndex < currentPhrase.length) {
-        setDisplayText(currentPhrase.slice(0, charIndex + 1));
-        charIndex++;
-      } else {
-        clearInterval(typeInterval);
-        setTimeout(() => {
-          const deleteInterval = setInterval(() => {
-            if (charIndex > 0) {
-              setDisplayText(currentPhrase.slice(0, charIndex - 1));
-              charIndex--;
-            } else {
-              clearInterval(deleteInterval);
-              setCurrentIndex((prevIndex) => (prevIndex + 1) % phrases.length);
-            }
-          }, 50);
-        }, 2000);
-      }
-    }, 100);
-
-    return () => clearInterval(typeInterval);
-  }, [currentIndex]);
-
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
   return (
-    <div style={{ 
-      backgroundColor: isDarkMode ? '#000' : '#fff', 
-      color: isDarkMode ? '#fff' : '#000', 
-      minHeight: '100vh',
-      width: '100%',
-      overflowX: 'hidden',
-      overflowY: 'auto',
-      transition: 'background-color 0.3s ease, color 0.3s ease'
-    }}>
-      <Navigation 
-        activeSection={activeSection}
-        isDarkMode={isDarkMode}
-        scrollToSection={scrollToSection}
-      />
-      
-      <Hero 
-        displayText={displayText}
-        isDarkMode={isDarkMode}
-      />
-      
-      <About 
-        isDarkMode={isDarkMode}
-        scrollToSection={scrollToSection}
-      />
-      
-      <Experience 
-        isDarkMode={isDarkMode}
-      />
-      
-      <Projects 
-        isDarkMode={isDarkMode}
-      />
-      
-      <Rewards 
-        isDarkMode={isDarkMode}
-      />
-      
-      <Connect 
-        isDarkMode={isDarkMode}
-        toggleTheme={toggleTheme}
-      />
+    <div className="bg-page text-secondary font-sans selection:bg-primary selection:text-page overflow-x-hidden">
+      <CustomCursor />
+
+      <Navigation />
+
+      <main>
+        <Hero />
+        <Marquee />
+        <About />
+        <Experience />
+        <Projects />
+        <Rewards />
+      </main>
+
+      {/* Footer */}
+      <footer className="py-24 relative overflow-hidden bg-page border-t border-border">
+        <div className="container mx-auto px-6 text-center">
+          <ScrollReveal>
+            <h2 className="font-display text-6xl md:text-8xl font-bold text-primary mb-12 tracking-tighter">
+              LET'S TALK
+            </h2>
+            <MagneticButton href="mailto:shravanramakunja@gmail.com" className="inline-block px-12 py-6 bg-primary text-page font-display font-bold text-xl uppercase tracking-widest hover:opacity-90 transition-opacity hover-trigger" data-cursor="link">
+              Get in Touch
+            </MagneticButton>
+
+            <div className="mt-24 flex flex-col md:flex-row justify-between items-center text-xs font-mono text-secondary uppercase tracking-widest">
+              <p>&copy; 2025 Shravan Ramakunja.</p>
+              <div className="flex space-x-8 mt-4 md:mt-0">
+                <a href="https://www.linkedin.com/in/shravan-ramakunja-4b3a25291/" className="hover:text-primary transition-colors">LinkedIn</a>
+                <a href="https://github.com/shravanramakunja" className="hover:text-primary transition-colors">GitHub</a>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </footer>
     </div>
   );
 }

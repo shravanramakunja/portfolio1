@@ -1,65 +1,25 @@
 import React from 'react';
+import MagneticButton from './MagneticButton';
+import ThemeToggle from './ThemeToggle';
 
-const Navigation = ({ activeSection, isDarkMode, scrollToSection }) => {
+const Navigation = () => {
   return (
-    <nav style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.9)' : 'rgba(255, 255, 255, 0.9)',
-      backdropFilter: 'blur(10px)',
-      padding: '1rem 2rem',
-      zIndex: 1000,
-      borderBottom: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`,
-      transition: 'all 0.3s ease'
-    }}>
-      <div 
-        className="nav-container"
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          maxWidth: '1200px',
-          margin: '0 auto'
-        }}
-      >
-        <div 
-          className="nav-links" 
-          style={{ display: 'flex', gap: '2rem' }}
-        >
-          {[
-            { name: 'Home', id: 'home' },
-            { name: 'About', id: 'about' },
-            { name: 'Experience', id: 'experience' },
-            { name: 'Projects', id: 'projects' },
-            { name: 'Rewards', id: 'rewards' },
-            { name: 'Connect', id: 'connect' }
-          ].map((item) => (
-            <button
-              key={item.id}
-              className="nav-button"
-              onClick={() => scrollToSection(item.id)}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: activeSection === item.id 
-                  ? (isDarkMode ? '#fff' : '#000') 
-                  : (isDarkMode ? '#888' : '#666'),
-                fontSize: '1rem',
-                cursor: 'pointer',
-                transition: 'color 0.3s ease',
-                fontWeight: activeSection === item.id ? '600' : '400'
-              }}
-              onMouseEnter={(e) => e.target.style.color = isDarkMode ? '#fff' : '#000'}
-              onMouseLeave={(e) => e.target.style.color = activeSection === item.id 
-                ? (isDarkMode ? '#fff' : '#000') 
-                : (isDarkMode ? '#888' : '#666')}
-            >
-              {item.name}
-            </button>
-          ))}
+    <nav className="fixed top-0 w-full z-50 glass">
+      <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+        <a href="#" className="font-display text-xl font-bold uppercase tracking-wider text-primary hover-trigger" data-cursor="link">
+          SR<span className="text-secondary">.</span>
+        </a>
+        <div className="hidden md:flex items-center space-x-12">
+          <a href="#about" className="text-xs uppercase tracking-widest text-secondary hover:text-primary transition-colors hover-trigger" data-cursor="link">About</a>
+          <a href="#experience" className="text-xs uppercase tracking-widest text-secondary hover:text-primary transition-colors hover-trigger" data-cursor="link">Experience</a>
+          <a href="#projects" className="text-xs uppercase tracking-widest text-secondary hover:text-primary transition-colors hover-trigger" data-cursor="link">Projects</a>
+          <a href="#awards" className="text-xs uppercase tracking-widest text-secondary hover:text-primary transition-colors hover-trigger" data-cursor="link">Awards</a>
+
+          <ThemeToggle />
         </div>
+        <MagneticButton href="mailto:contact@shravan.dev" className="hidden md:inline-flex items-center justify-center px-6 py-3 text-xs font-bold uppercase tracking-widest text-page bg-primary hover:opacity-90 transition-opacity hover-trigger" data-cursor="link">
+          Contact
+        </MagneticButton>
       </div>
     </nav>
   );

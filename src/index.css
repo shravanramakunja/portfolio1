@@ -1,1 +1,210 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: 'Outfit', sans-serif;
+  --font-display: 'Unbounded', sans-serif;
+
+  --color-page: var(--bg-primary);
+  --color-card: var(--bg-secondary);
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-border: var(--border-color);
+  --color-border-hover: var(--border-hover);
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-marquee: marquee 30s linear infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+}
+
+/* --- CSS Variables for Theme --- */
+:root {
+  /* Dark Theme (Default) */
+  --bg-primary: #050505;
+  --bg-secondary: #0f0f0f;
+  --text-primary: #ffffff;
+  --text-secondary: #a8a8a8;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(255, 255, 255, 0.3);
+  --grid-color: rgba(255, 255, 255, 0.03);
+  --stroke-color: rgba(255, 255, 255, 0.15);
+  --cursor-color: white;
+  --cursor-mix-blend: difference;
+  --glass-bg: rgba(5, 5, 5, 0.8);
+  --abstract-bg: #111;
+}
+
+[data-theme="light"] {
+  /* Light Theme */
+  --bg-primary: #f0f0f0;
+  --bg-secondary: #ffffff;
+  --text-primary: #0a0a0a;
+  --text-secondary: #52525b;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(0, 0, 0, 0.2);
+  --grid-color: rgba(0, 0, 0, 0.03);
+  --stroke-color: rgba(0, 0, 0, 0.1);
+  --cursor-color: black;
+  --cursor-mix-blend: normal;
+  --glass-bg: rgba(240, 240, 240, 0.85);
+  --abstract-bg: #e5e5e5;
+}
+
+@layer base {
+  body {
+    @apply bg-page text-secondary font-sans selection:bg-primary selection:text-page overflow-x-hidden;
+  }
+}
+
+@layer utilities {
+  .text-outline {
+    -webkit-text-stroke: 1px var(--stroke-color);
+    color: transparent;
+  }
+
+  .stroke-text {
+    -webkit-text-stroke: 1px var(--stroke-color);
+    color: transparent;
+  }
+
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .bg-grid-pattern {
+    background-image:
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 4rem 4rem;
+  }
+}
+
+/* Base Transitions */
+body,
+.bento-card,
+nav,
+.glass,
+.magnetic-btn {
+  transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    border-color 0.4s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-page);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* Custom Cursor */
+.cursor-dot,
+.cursor-outline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 9999;
+  pointer-events: none;
+  mix-blend-mode: var(--cursor-mix-blend);
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--cursor-color);
+}
+
+.cursor-outline {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-secondary);
+  transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+body.hovering .cursor-outline {
+  width: 70px;
+  height: 70px;
+  background-color: var(--color-primary);
+  border-color: transparent;
+  opacity: 0.1;
+}
+
+/* Bento Grid Card */
+.bento-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-border-hover);
+}
+
+/* Magnetic Button */
+.magnetic-btn {
+  display: inline-block;
+  transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Reveal Animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scramble Text */
+.scramble-text .dud {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--border-hover);
+  transform: rotate(15deg);
+}
