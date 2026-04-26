@@ -7,21 +7,14 @@ const Experience = () => {
       date: '2025 - Present',
       role: 'President',
       description: 'leading nova innovative compskey as president, driving innovation and fostering a collaborative environment for engineering students.',
-      link: '#'
-    },
-    {
-      company: 'GirlScript Summer Of Code',
-      date: '2025',
-      role: 'Open Source Contributor',
-      description: 'contributed to various open-source projects, collaborated with developers worldwide.',
-      link: 'https://gssoc.girlscript.tech/'
+      link: 'http://nicclub.dev/'
     },
     {
       company: 'Nova Innovative Compskey',
       date: 'Nov 2024 - Present',
       role: 'Design Sub Lead',
       description: 'guide and supervise the club\'s design team in developing engineering project concepts.',
-      link: '#'
+      link: 'http://nicclub.dev/'
     }
   ];
 

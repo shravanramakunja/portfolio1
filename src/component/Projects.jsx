@@ -3,19 +3,49 @@ import React from 'react';
 const Projects = () => {
   const projects = [
     {
+      title: 'AutoBulkSender',
+      description: 'automates certificate creation and email delivery.',
+      link: 'https://github.com/shravanramakunja/AutoBulkSender'
+    },
+    {
+      title: 'EventEase',
+      description: 'seamless event registration and check-in platform with automated workflows and attendance management.',
+      link: 'https://github.com/shravanramakunja/EventEase'
+    },
+    {
+      title: 'Inquisit',
+      description: 'rag-based ai application for generating questions and evaluating answers from documents.',
+      link: 'https://github.com/shravanramakunja/Inquisit'
+    },
+    {
       title: 'ZenAI',
       description: 'medical rag chatbot using retrieval-augmented generation to provide accurate answers.',
       link: 'https://github.com/shravanramakunja/ZenAI'
     },
     {
-      title: 'AlgoSphere',
-      description: 'comprehensive machine learning implementations featuring linear & logistic regression.',
-      link: 'https://github.com/shravanramakunja/AlgoSphere'
-    },
-    {
       title: 'BriefBot',
       description: 'ai-powered tool that automatically extracts and summarizes website content.',
-      link: 'https://github.com/shravanramakunja/BreifBot'
+      link: 'https://github.com/shravanramakunja/BriefBot'
+    },
+    {
+      title: 'TabZero',
+      description: 'minimal browser-based interface built with clean html for lightweight usage (open source).',
+      link: 'https://github.com/shravanramakunja/TabZero'
+    },
+    {
+      title: 'CodeSage',
+      description: 'ai-powered github code review system using gemini for automated pull request feedback.',
+      link: 'https://github.com/shravanramakunja/CodeSage'
+    },
+    {
+      title: 'CasualGPTx',
+      description: 'lightweight conversational ai chatbot built using transformers.',
+      link: 'https://github.com/shravanramakunja/CasualGPTx'
+    },
+    {
+      title: 'Flow',
+      description: 'intent-driven browser extension for managing tabs and boosting productivity (open source).',
+      link: 'https://github.com/shravanramakunja/Flow'
     }
   ];
 
