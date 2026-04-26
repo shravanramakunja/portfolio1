@@ -63,6 +63,14 @@ const Projects = () => {
           </div>
         ))}
       </div>
+
+      <div className='mt-8'>
+        <h3 className='font-bold text-primary'>currently working on</h3>
+        <a href='https://swtich-board.vercel.app/' className='group block no-underline mt-2'>
+          <span className='inline font-bold text-primary group-hover:underline decoration-secondary/50 underline-offset-4'>SwtichBoard</span>
+          <span className='text-secondary text-sm ml-2'>- full-stack web application for managing school attendance.</span>
+        </a>
+      </div>
     </section>
   );
 };
