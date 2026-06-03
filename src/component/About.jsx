@@ -6,7 +6,7 @@ const About = () => {
       <h2 className='section-title'>about</h2>
       
       <div className='text-secondary space-y-4 text-sm'>
-        <p><span className='text-primary font-bold'>tldr;</span> learnt by googling around on the internet.</p>
+        <p><span className='text-primary font-bold'>tldr;</span> learnt by googling and using ai tools around on the internet.</p>
         
         <p>
           i like technology and deep science. they make a dent in the universe.

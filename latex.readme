@@ -1,0 +1,24 @@
+LaTeX Resume Files
+
+This workspace now includes a LaTeX resume source customized with your profile links:
+- LinkedIn: https://www.linkedin.com/in/shravan-ramakunja-4b3a25291/
+- GitHub: https://github.com/shravanramakunja
+- Portfolio: https://www.shravanramakunja.in/
+
+Files
+- resume.tex: main LaTeX resume source
+- latex.readme: build and usage notes
+
+Build Commands
+1. Install a LaTeX distribution (TeX Live or MiKTeX).
+2. From this folder, run:
+   pdflatex resume.tex
+3. Run pdflatex resume.tex a second time for stable layout and links.
+
+Output
+- resume.pdf will be generated in the same folder.
+
+Quick Customization
+- Update summary and skills in resume.tex.
+- Add or remove project entries in the PROJECTS section.
+- Edit contact details in the header block at the top of resume.tex.

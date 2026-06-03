@@ -1,0 +1,173 @@
+%-------------------------
+% Resume in Latex
+% Customized for Shravan Ramakunja
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage[scale=0.90,lf]{FiraMono}
+\usepackage{contour}
+\usepackage[normalem]{ulem}
+\usepackage{tgheros}
+\usepackage[T1]{fontenc}
+
+\definecolor{light-grey}{gray}{0.83}
+\definecolor{dark-grey}{gray}{0.3}
+\definecolor{text-grey}{gray}{.08}
+
+\renewcommand*\familydefault{\sfdefault}
+\renewcommand{\ULdepth}{1.8pt}
+\contourlength{0.8pt}
+\newcommand{\myuline}[1]{%
+  \uline{\phantom{#1}}%
+  \llap{\contour{white}{#1}}%
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{0in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \bfseries \vspace{2pt} \raggedright \large
+}{}{0em}{}[\color{light-grey}{\titlerule[2pt]} \vspace{-4pt}]
+
+\newcommand{\resumeItem}[1]{
+  \item\small{{#1 \vspace{-1pt}}}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & {\color{dark-grey}\small #2}\vspace{1pt}\\
+      \textit{#3} & {\color{dark-grey}\small #4}\\
+    \end{tabular*}\vspace{-4pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+  \item
+    \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+      #1 & {\color{dark-grey}\small #2}\\
+    \end{tabular*}\vspace{-4pt}
+}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{0pt}}
+
+\color{text-grey}
+
+\begin{document}
+
+\begin{center}
+    \textbf{\Huge Shravan Ramakunja} \\ \vspace{5pt}
+    \small \faEnvelope \hspace{2pt} \texttt{shravanramakunja@gmail.com} \hspace{2pt} $|$
+    \hspace{2pt} \faGithub \hspace{2pt} \href{https://github.com/shravanramakunja}{\myuline {github.com/shravanramakunja}} \hspace{2pt} $|$
+    \hspace{2pt} \faLinkedin \hspace{2pt} \href{https://www.linkedin.com/in/shravan-ramakunja-4b3a25291/}{\myuline {linkedin.com/in/shravan-ramakunja-4b3a25291}} \hspace{2pt} $|$
+    \hspace{2pt} \faGlobe \hspace{2pt} \href{https://www.shravanramakunja.in/}{\myuline {shravanramakunja.in}}
+    \\ \vspace{-3pt}
+\end{center}
+
+\section{SUMMARY}
+\resumeSubHeadingListStart
+  \item\small{
+    Engineering student focused on AI applications, backend systems, and practical full-stack product development.
+  }
+\resumeSubHeadingListEnd
+
+\section{EXPERIENCE}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {Nova Innovative Compskey (NIC)}{2025 -- Present}
+    {President}{India}
+    \resumeItemListStart
+      \resumeItem{Leading innovation initiatives, student collaboration, and project execution across engineering teams.}
+    \resumeItemListEnd
+
+  \resumeSubheading
+    {Nova Innovative Compskey (NIC)}{Nov. 2024 -- Present}
+    {Design Sub Lead}{India}
+    \resumeItemListStart
+      \resumeItem{Guiding design direction for engineering projects and coordinating with development contributors.}
+    \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\section{EDUCATION}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {MVJ College of Engineering}{2023 -- Present}
+    {B.E. in Engineering}{Bengaluru, India}
+\resumeSubHeadingListEnd
+
+\section{PROJECTS}
+\resumeSubHeadingListStart
+  \resumeProjectHeading
+    {\textbf{SwitchBoard} $|$ \href{https://swtich-board.vercel.app/}{\myuline {Live Project}}}{Current}
+    \resumeItemListStart
+      \resumeItem{Built a full-stack school attendance platform for daily tracking, student records, and reporting workflows.}
+      \resumeItem{Implemented role-based interfaces for staff and administrators to reduce manual follow-up.}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{AutoBulkSender} $|$ \href{https://github.com/shravanramakunja/AutoBulkSender}{\myuline {GitHub}}}{2026}
+    \resumeItemListStart
+      \resumeItem{Automated certificate generation and bulk email delivery from spreadsheet-based participant data.}
+      \resumeItem{Reduced manual effort for event teams by creating a reusable end-to-end workflow.}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{EventEase} $|$ \href{https://github.com/shravanramakunja/EventEase}{\myuline {GitHub}}}{2026}
+    \resumeItemListStart
+      \resumeItem{Developed an event registration and check-in platform with automated attendance workflows.}
+      \resumeItem{Centralized registration, check-in, and participant updates to improve organizer operations.}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{Inquisit} $|$ \href{https://github.com/shravanramakunja/Inquisit}{\myuline {GitHub}}}{2026}
+    \resumeItemListStart
+      \resumeItem{Built a RAG application for document-grounded question generation and answer evaluation.}
+      \resumeItem{Implemented retrieval + generation pipeline to improve relevance and reduce hallucinations.}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{CodeSage} $|$ \href{https://github.com/shravanramakunja/CodeSage}{\myuline {GitHub}}}{2026}
+    \resumeItemListStart
+      \resumeItem{Built an AI-assisted review workflow that generates pull request feedback and speeds up review cycles.}
+      \resumeItem{Produced actionable comments to improve code quality and maintain developer velocity.}
+    \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\section{SKILLS}
+\begin{itemize}[leftmargin=0in, label={}]
+  \small{\item{
+    \textbf{Core} {: React, Python, Node.js, MongoDB, Agentic Systems, Backend Development} \\
+    \textbf{Links} {: \href{https://github.com/shravanramakunja}{\myuline {GitHub}}, \href{https://www.linkedin.com/in/shravan-ramakunja-4b3a25291/}{\myuline {LinkedIn}}, \href{https://www.shravanramakunja.in/}{\myuline {Portfolio}}}
+  }}
+\end{itemize}
+
+\end{document}

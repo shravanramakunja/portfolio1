@@ -22,8 +22,7 @@ const Hero = () => {
             <p className='text-secondary text-sm font-mono'>been here for {age} years</p>
         </div>
         <div className='w-12 h-12 bg-white rounded-full overflow-hidden'>
-            {/* Placeholder for image if needed, or just remove */}
-            <img src='https://github.com/shravanramakunja.png' alt='Shravan' className='w-full h-full object-cover grayscale' />
+            <img src='/profile.png' alt='Shravan' className='w-full h-full object-cover' />
         </div>
       </div>
     </section>

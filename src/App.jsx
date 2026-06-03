@@ -3,21 +3,22 @@ import Hero from './component/Hero';
 import About from './component/About';
 import Experience from './component/Experience';
 import Projects from './component/Projects';
+import Reveal from './component/Reveal';
 
 function App() {
   return (
     <div className='min-h-screen'>
       <main>
-        <Hero />
-        <About />
-        <Experience />
-        <Projects />
+        <Reveal><Hero /></Reveal>
+        <Reveal><About /></Reveal>
+        <Reveal><Experience /></Reveal>
+        <Reveal><Projects /></Reveal>
       </main>
 
-      <footer className='mt-24 mb-12 text-sm text-secondary'>
+      <Reveal as='footer' className='mt-24 mb-12 text-sm text-secondary'>
         <h2 className='section-title'>stay updated</h2>
         <p className='mb-8'>subscribe to my email list</p>
-        
+
         <div className='flex gap-4 mb-12'>
            <input type='email' placeholder='email address' className='bg-[#111] border border-[#333] px-4 py-2 rounded text-sm w-full max-w-xs focus:outline-none focus:border-white transition-colors' />
            <button className='bg-white text-black px-4 py-2 rounded text-sm font-bold hover:opacity-90'>Subscribe</button>
@@ -33,7 +34,7 @@ function App() {
                 <a href='mailto:shravanramakunja@gmail.com'>Email</a>
             </div>
         </div>
-      </footer>
+      </Reveal>
     </div>
   );
 }
