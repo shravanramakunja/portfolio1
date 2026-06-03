@@ -4,8 +4,11 @@ import About from './component/About';
 import Experience from './component/Experience';
 import Projects from './component/Projects';
 import Reveal from './component/Reveal';
+import useClickSound from './hooks/useClickSound';
 
 function App() {
+  useClickSound();
+
   return (
     <div className='min-h-screen'>
       <main>
