@@ -4,13 +4,12 @@ const About = () => {
   return (
     <section id="about" className="mt-10">
       <div>
-        <p className="text-sm text-[#909092]">about</p>
-        <h2 className="text-xl font-bold mt-1">me</h2>
+          <p className="text-xl font-bold mt-1">about</p>
       </div>
 
       <div className="mt-6 flex flex-col gap-6 md:flex-row">
         <div className="flex flex-col">
-          <h3 className="text-xl font-bold">Shravan Ramakunja</h3>
+        
 
           <div className="text-muted-foreground mt-3 space-y-2 text-sm leading-relaxed">
             <p>

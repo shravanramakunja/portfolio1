@@ -20,9 +20,9 @@ const Hero = () => {
       {/* Flex row: Image left, Name right */}
       <div className="flex items-start gap-5">
         {/* Profile Image */}
-        <div className="size-16 sm:size-20 shrink-0 rounded-full overflow-hidden bg-blue-300 dark:bg-yellow-300 border-2 border-border">
+        <div className="size-16 sm:size-20 shrink-0 rounded-full overflow-hidden border-2 border-border">
           <img
-            src="/profile.png"
+            src="/profile.svg"
             alt="Shravan"
             className="w-full h-full object-cover"
           />
@@ -31,7 +31,7 @@ const Hero = () => {
         {/* Name area */}
         <div className="flex flex-col gap-0.5 pt-1">
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight leading-tight">
-            Shravan
+            Shravan Ramakunja
           </h1>
           <p className="text-secondary text-sm sm:text-base font-medium leading-relaxed">Engineer · Polymath · Build with Scripts</p>
           <span className="mt-1 font-mono text-xs text-[#909092]">been here for {age} years</span>
