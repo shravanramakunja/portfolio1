@@ -3,6 +3,9 @@ import Hero from './component/Hero';
 import About from './component/About';
 import Experience from './component/Experience';
 import Projects from './component/Projects';
+import Achievements from './component/Achievements';
+import Extras from './component/Extras';
+
 import Reveal from './component/Reveal';
 import OnekoCat from './component/OnekoCat';
 import CornerBrackets from './component/CornerBrackets';
@@ -10,7 +13,7 @@ import useClickSound from './hooks/useClickSound';
 
 import { FiSun, FiMoon } from 'react-icons/fi';
 
-const SECTIONS = ['about', 'experience', 'projects'];
+const SECTIONS = ['about', 'experience', 'projects', 'achievements', 'extras'];
 
 function useTheme() {
   const [theme, setTheme] = useState(() => {
@@ -153,6 +156,11 @@ function App() {
       <div className="hatch-divider my-8" />
       <Reveal><div className="relative"><Projects /><CornerBrackets /></div></Reveal>
       <div className="hatch-divider my-8" />
+      <Reveal><div className="relative"><Achievements /><CornerBrackets /></div></Reveal>
+      <div className="hatch-divider my-8" />
+      <Reveal><div className="relative"><Extras /><CornerBrackets /></div></Reveal>
+      <div className="hatch-divider my-8" />
+
 
       {/* Footer */}
 
