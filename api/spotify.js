@@ -1,75 +1,47 @@
-// Vercel serverless function — fetches currently playing / last played song from Spotify
-// Uses a stored refresh token + client credentials (safe server-side)
+// Vercel serverless function — fetches last played song from Last.fm
+// Uses Last.fm's public API (free, no Premium needed)
 
-const CLIENT_ID = process.env.VITE_SPOTIFY_CLIENT_ID;
-const CLIENT_SECRET = process.env.VITE_SPOTIFY_CLIENT_SECRET;
-const REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN;
+const LASTFM_API_KEY = process.env.LASTFM_API_KEY;
+const LASTFM_USERNAME = process.env.LASTFM_USERNAME;
 
-async function getAccessToken() {
-  const res = await fetch('https://accounts.spotify.com/api/token', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      Authorization:
-        'Basic ' + Buffer.from(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64'),
-    },
-    body: new URLSearchParams({
-      grant_type: 'refresh_token',
-      refresh_token: REFRESH_TOKEN,
-    }),
-  });
+async function fetchRecentTrack() {
+  const url = new URL('https://ws.audioscrobbler.com/2.0/');
+  url.searchParams.set('method', 'user.getRecentTracks');
+  url.searchParams.set('user', LASTFM_USERNAME);
+  url.searchParams.set('api_key', LASTFM_API_KEY);
+  url.searchParams.set('format', 'json');
+  url.searchParams.set('limit', '1');
+
+  const res = await fetch(url.toString());
 
   if (!res.ok) {
     const text = await res.text();
-    throw new Error(`Token refresh failed: ${res.status} — ${text}`);
+    throw new Error(`Last.fm API error: ${res.status} — ${text}`);
   }
 
   const data = await res.json();
-  if (!data.access_token) throw new Error('No access_token in response');
-  return data.access_token;
-}
+  const tracks = data?.recenttracks?.track;
 
-async function fetchCurrentlyPlaying(token) {
-  const res = await fetch(
-    'https://api.spotify.com/v1/me/player/currently-playing',
-    { headers: { Authorization: `Bearer ${token}` } },
-  );
-  if (res.status === 204 || !res.ok) return null;
-  const data = await res.json();
-  if (data?.item) {
-    return {
-      title: data.item.name,
-      artist: data.item.artists.map((a) => a.name).join(', '),
-      url: data.item.external_urls.spotify,
-      albumArt: data.item.album.images[0]?.url,
-      isPlaying: data.is_playing,
-    };
-  }
-  return null;
-}
+  if (!tracks || tracks.length === 0) return null;
 
-async function fetchRecentlyPlayed(token) {
-  const res = await fetch(
-    'https://api.spotify.com/v1/me/player/recently-played?limit=1',
-    { headers: { Authorization: `Bearer ${token}` } },
-  );
-  if (!res.ok) return null;
-  const data = await res.json();
-  if (data?.items?.length > 0) {
-    const track = data.items[0].track;
-    return {
-      title: track.name,
-      artist: track.artists.map((a) => a.name).join(', '),
-      url: track.external_urls.spotify,
-      albumArt: track.album.images[0]?.url,
-      isPlaying: false,
-    };
-  }
-  return null;
+  const track = tracks[0];
+  const images = track.image || [];
+  const albumArt =
+    images.find((img) => img.size === 'extralarge')?.['#text'] ||
+    images.find((img) => img.size === 'large')?.['#text'] ||
+    images.find((img) => img.size === 'medium')?.['#text'] ||
+    null;
+
+  return {
+    title: track.name || 'Unknown',
+    artist: track.artist?.['#text'] || 'Unknown',
+    url: track.url,
+    albumArt: albumArt || null,
+    isPlaying: !!track['@attr']?.nowplaying,
+  };
 }
 
 export default async function handler(req, res) {
-  // CORS — allow same-origin requests from the frontend
   res.setHeader('Access-Control-Allow-Origin', '*');
 
   if (req.method === 'OPTIONS') {
@@ -80,22 +52,19 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // If refresh token isn't configured yet, tell the user
-  if (!REFRESH_TOKEN) {
+  if (!LASTFM_API_KEY || !LASTFM_USERNAME) {
     return res.status(200).json({
       track: null,
       needsSetup: true,
-      message: 'SPOTIFY_REFRESH_TOKEN not configured',
+      message: 'LASTFM_API_KEY or LASTFM_USERNAME not configured',
     });
   }
 
   try {
-    const accessToken = await getAccessToken();
-    let track = await fetchCurrentlyPlaying(accessToken);
-    if (!track) track = await fetchRecentlyPlayed(accessToken);
+    const track = await fetchRecentTrack();
     res.status(200).json({ track, needsSetup: false });
   } catch (error) {
-    console.error('Spotify API error:', error);
+    console.error('Last.fm API error:', error);
     res.status(200).json({ track: null, needsSetup: false, error: error.message });
   }
 }
