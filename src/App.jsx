@@ -5,6 +5,7 @@ import Experience from './component/Experience';
 import Projects from './component/Projects';
 import Reveal from './component/Reveal';
 import OnekoCat from './component/OnekoCat';
+import CornerBrackets from './component/CornerBrackets';
 import useClickSound from './hooks/useClickSound';
 
 import { FiSun, FiMoon } from 'react-icons/fi';
@@ -138,16 +139,20 @@ function App() {
   const { theme, toggle: toggleTheme } = useTheme();
 
   return (
-    <div className="container mx-auto max-w-3xl px-4 min-h-screen py-8">
+    <div className="container mx-auto max-w-3xl px-4 min-h-screen py-8 dot-grid-bg relative">
       <OnekoCat />
       <ScrollProgress />
 
       <Navbar theme={theme} onToggleTheme={toggleTheme} />
 
-      <Reveal><Hero /></Reveal>
-      <Reveal><About /></Reveal>
-      <Reveal><Experience /></Reveal>
-      <Reveal><Projects /></Reveal>
+      <Reveal><div className="relative"><Hero /><CornerBrackets /></div></Reveal>
+      <div className="hatch-divider my-8" />
+      <Reveal><div className="relative"><About /><CornerBrackets /></div></Reveal>
+      <div className="hatch-divider my-8" />
+      <Reveal><div className="relative"><Experience /><CornerBrackets /></div></Reveal>
+      <div className="hatch-divider my-8" />
+      <Reveal><div className="relative"><Projects /><CornerBrackets /></div></Reveal>
+      <div className="hatch-divider my-8" />
 
       {/* Footer */}
 

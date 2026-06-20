@@ -210,3 +210,37 @@
     inset 0 1px 3px rgba(0, 0, 0, 0.08),
     inset 0 2px 6px rgba(0, 0, 0, 0.06);
 }
+
+/* Dot grid background pattern */
+.dark .dot-grid-bg {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 15px 15px;
+}
+
+.light .dot-grid-bg {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+  background-size: 15px 15px;
+}
+
+/* Hatching divider */
+.dark .hatch-divider {
+  height: 12px;
+  background-image: repeating-linear-gradient(
+    315deg,
+    rgba(255, 255, 255, 0.35) 0px,
+    rgba(255, 255, 255, 0.35) 1px,
+    transparent 1px,
+    transparent 8px
+  );
+}
+
+.light .hatch-divider {
+  height: 12px;
+  background-image: repeating-linear-gradient(
+    315deg,
+    rgba(0, 0, 0, 0.2) 0px,
+    rgba(0, 0, 0, 0.2) 1px,
+    transparent 1px,
+    transparent 8px
+  );
+}

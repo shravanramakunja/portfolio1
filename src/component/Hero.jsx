@@ -1,5 +1,36 @@
 import React, { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import NowPlaying from './NowPlaying';
+
+const roles = ['Engineer', 'Polymath', 'Building with Scripts'];
+
+function FlipWords({ words }) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % words.length);
+    }, 2300);
+    return () => clearInterval(interval);
+  }, [words.length]);
+
+  return (
+    <span className="relative inline-block min-w-[24ch] align-baseline">
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={words[index]}
+          initial={{ opacity: 0, y: 10, filter: 'blur(8px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          exit={{ opacity: 0, y: -10, filter: 'blur(8px)' }}
+          transition={{ duration: 0.3 }}
+          className="inline-block"
+        >
+          {words[index]}
+        </motion.span>
+      </AnimatePresence>
+    </span>
+  );
+}
 
 const Hero = () => {
   const [age, setAge] = useState(20.000000000);
@@ -33,7 +64,9 @@ const Hero = () => {
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight leading-tight">
             Shravan Ramakunja
           </h1>
-          <p className="text-secondary text-sm sm:text-base font-medium leading-relaxed">Engineer · Polymath · Build with Scripts</p>
+          <p className="text-secondary text-sm sm:text-base font-medium leading-relaxed">
+            <FlipWords words={roles} />
+          </p>
           <span className="mt-1 font-mono text-xs text-[#909092]">been here for {age} years</span>
         </div>
       </div>
