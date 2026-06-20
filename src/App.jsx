@@ -66,6 +66,7 @@ function ScrollProgress() {
 function Navbar({ theme, onToggleTheme }) {
   const [activeSection, setActiveSection] = useState('');
   const [visible, setVisible] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -102,13 +103,18 @@ function Navbar({ theme, onToggleTheme }) {
     return () => observers.forEach((o) => o?.disconnect());
   }, []);
 
+  const handleNavClick = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
     <nav
-      className={`sticky top-2 z-20 rounded-md py-3 backdrop-blur-xl bg-background/60 mb-6 transition-all duration-300 flex items-center justify-between px-4 ${
+      className={`sticky top-2 z-20 relative rounded-md py-3 backdrop-blur-xl bg-background/60 mb-6 transition-all duration-300 flex items-center justify-between px-4 ${
         visible ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
       }`}
     >
-      <div className="flex items-center justify-center flex-1">
+      {/* Desktop Navigation */}
+      <div className="hidden md:flex items-center justify-center flex-1">
         <div className="flex items-center justify-center gap-6">
           {SECTIONS.map((id) => (
             <a
@@ -126,13 +132,70 @@ function Navbar({ theme, onToggleTheme }) {
         </div>
       </div>
 
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        className="md:hidden flex items-center justify-center size-7 rounded-md border border-border bg-card text-muted-foreground hover:text-foreground hover:bg-accent hover:border-accent transition-all duration-200 cursor-pointer shrink-0"
+        title="Toggle menu"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          {mobileMenuOpen ? (
+            <>
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </>
+          ) : (
+            <>
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </>
+          )}
+        </svg>
+      </button>
+
+      {/* Theme Toggle - Desktop */}
       <button
         onClick={onToggleTheme}
-        className="flex items-center justify-center size-7 rounded-md border border-border bg-card text-muted-foreground hover:text-foreground hover:bg-accent hover:border-accent transition-all duration-200 cursor-pointer shrink-0"
+        className="hidden md:flex items-center justify-center size-7 rounded-md border border-border bg-card text-muted-foreground hover:text-foreground hover:bg-accent hover:border-accent transition-all duration-200 cursor-pointer shrink-0"
         title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
       >
         {theme === 'dark' ? <FiSun size={13} /> : <FiMoon size={13} />}
       </button>
+
+      {/* Mobile Menu Dropdown */}
+      {mobileMenuOpen && (
+        <div className="absolute top-full left-0 right-0 mt-1 rounded-md backdrop-blur-xl bg-background/95 border border-border shadow-lg md:hidden">
+          <div className="flex flex-col py-2">
+            {SECTIONS.map((id) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                onClick={handleNavClick}
+                className={`px-4 py-2.5 text-sm no-underline transition-all duration-200 ${
+                  activeSection === id
+                    ? 'text-foreground font-semibold bg-accent'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
+                }`}
+              >
+                {id.charAt(0).toUpperCase() + id.slice(1)}
+              </a>
+            ))}
+            <div className="border-t border-border mt-2 pt-2">
+              <button
+                onClick={() => {
+                  onToggleTheme();
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-all duration-200 cursor-pointer"
+              >
+                {theme === 'dark' ? <FiSun size={13} /> : <FiMoon size={13} />}
+                <span>Switch to {theme === 'dark' ? 'light' : 'dark'} mode</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
