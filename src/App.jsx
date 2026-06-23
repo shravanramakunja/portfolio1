@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useLenis } from 'lenis/react';
 import Hero from './component/Hero';
 import About from './component/About';
 import Experience from './component/Experience';
@@ -41,17 +42,9 @@ function useTheme() {
 function ScrollProgress() {
   const [progress, setProgress] = useState(0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(docHeight > 0 ? Math.min(scrollTop / docHeight, 1) : 0);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  useLenis(({ scroll, limit }) => {
+    setProgress(limit > 0 ? Math.min(scroll / limit, 1) : 0);
+  });
 
   return (
     <div className="fixed top-0 left-0 z-50 w-full h-[2px]">
@@ -69,20 +62,14 @@ function Navbar({ theme, onToggleTheme }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > lastScrollY.current && currentScrollY > 80) {
-        setVisible(false);
-      } else {
-        setVisible(true);
-      }
-      lastScrollY.current = currentScrollY;
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  useLenis(({ scroll }) => {
+    if (scroll > lastScrollY.current && scroll > 80) {
+      setVisible(false);
+    } else {
+      setVisible(true);
+    }
+    lastScrollY.current = scroll;
+  });
 
   useEffect(() => {
     const observers = SECTIONS.map((id) => {
