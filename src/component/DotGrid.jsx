@@ -9,7 +9,7 @@ export default function DotGrid() {
     const ctx = canvas.getContext('2d');
 
     const spacing = 34;
-    const dotSize = 1.1;
+    const dotSize = 1.5;
 
     function draw() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -23,7 +23,7 @@ export default function DotGrid() {
       ctx.clearRect(0, 0, rect.width, rect.height);
 
       const isDark = document.documentElement.classList.contains('dark');
-      const alpha = isDark ? 0.12 : 0.10;
+      const alpha = isDark ? 0.35 : 0.25;
       const color = isDark ? '255,255,255' : '0,0,0';
       ctx.fillStyle = `rgba(${color},${alpha})`;
 
