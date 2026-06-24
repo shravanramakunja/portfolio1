@@ -10,6 +10,7 @@ import Extras from './component/Extras';
 import Reveal from './component/Reveal';
 import OnekoCat from './component/OnekoCat';
 import CornerBrackets from './component/CornerBrackets';
+import DotGrid from './component/DotGrid';
 import useClickSound from './hooks/useClickSound';
 
 import { FiSun, FiMoon } from 'react-icons/fi';
@@ -192,7 +193,8 @@ function App() {
   const { theme, toggle: toggleTheme } = useTheme();
 
   return (
-    <div className="container mx-auto max-w-3xl px-4 min-h-screen py-8 dot-grid-bg relative">
+    <div className="container mx-auto max-w-3xl px-4 min-h-screen py-8 relative">
+      <DotGrid />
       <OnekoCat />
       <ScrollProgress />
 
