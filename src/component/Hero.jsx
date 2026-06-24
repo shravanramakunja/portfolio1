@@ -33,7 +33,7 @@ function FlipWords({ words }) {
 }
 
 const Hero = () => {
-  const [age, setAge] = useState(20.000000000);
+  const [age, setAge] = useState('20.00');
 
   useEffect(() => {
     const birthDate = new Date('2005-06-25');
@@ -41,8 +41,8 @@ const Hero = () => {
       const now = new Date();
       const diffTime = Math.abs(now - birthDate);
       const diffYears = diffTime / (1000 * 60 * 60 * 24 * 365.25);
-      setAge(diffYears.toFixed(9));
-    }, 100);
+      setAge(diffYears.toFixed(2));
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
 
