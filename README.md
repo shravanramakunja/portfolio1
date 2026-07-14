@@ -8,6 +8,7 @@ Personal portfolio built with **React**, **Vite**, and **Tailwind CSS** — insp
 
 ## Stack
 
+hi
 - **React 19** + **Vite 6**
 - **Tailwind CSS 4**
 - **GSAP** & **Framer Motion** — animations
