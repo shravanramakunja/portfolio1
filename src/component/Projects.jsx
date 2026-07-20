@@ -10,6 +10,7 @@ import {
   SiGooglegemini,
   SiStreamlit,
   SiGooglechrome,
+  SiReact,
 } from 'react-icons/si';
 import {
   FiDatabase,
@@ -37,6 +38,7 @@ const techConfig = {
   EJS: { icon: FiFileText, color: 'bg-pink-500/10 text-pink-400 border-pink-500/20' },
   'GitHub API': { icon: FiGithub, color: 'bg-gray-500/10 text-gray-400 border-gray-500/20' },
   AI: { icon: FiCpu, color: 'bg-violet-500/10 text-violet-400 border-violet-500/20' },
+  React: { icon: SiReact, color: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' },
 };
 
 const techStacks = {
@@ -49,6 +51,7 @@ const techStacks = {
   CodeSage: ['GitHub API', 'AI'],
   CasualGPTx: ['Python', 'Transformers'],
   Flow: ['JavaScript', 'Chrome API'],
+  Vedanth: ['React', 'Node', 'Express', 'AI'],
 };
 
 const TechTag = ({ name }) => {
@@ -116,6 +119,11 @@ const Projects = () => {
       title: 'Flow',
       description: 'intent-driven browser extension for managing tabs and boosting productivity (open source).',
       link: 'https://github.com/shravanramakunja/Flow'
+    },
+    {
+      title: 'Vedanth',
+      description: 'ai-powered food analysis platform providing real-time nutritional insights, bringing healthcare from the hospital to your home.',
+      link: 'https://github.com/shravanramakunja/Vedanth'
     }
   ];
 
