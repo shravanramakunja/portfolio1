@@ -11,7 +11,7 @@ Files
 
 Build Commands
 1. Install a LaTeX distribution (TeX Live or MiKTeX).
-2. From this folder, run:
+2. From this folder, run:ddd
    pdflatex resume.tex
 3. Run pdflatex resume.tex a second time for stable layout and links.
 
