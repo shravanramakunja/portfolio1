@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiImage } from 'react-icons/fi';
+import { FiExternalLink, FiImage } from 'react-icons/fi';
 
 const publications = [
   {
@@ -11,6 +11,7 @@ const publications = [
     venue: '2nd International Conference on Distributed Systems, Computer Networks and Cybersecurity (ICDSNC 2026)',
     organizer: 'Sri Krishna Institute of Technology, Bengaluru',
     date: '28–29 August 2026',
+    link: 'https://ieeexplore.ieee.org/document/11746346',
     image: '/certificate.jpeg',
     imageAlt: 'Certificate of Appreciation — ICDSNC 2026, Sri Krishna Institute of Technology',
   },
@@ -52,6 +53,17 @@ const PublicationCard = ({ publication }) => {
           <span className="text-2xl">📄</span>
           <div className="flex items-center gap-2 flex-wrap">
             <h3 className="text-base font-bold">{publication.title}</h3>
+            {publication.link && (
+              <a
+                href={publication.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="View publication on IEEE Xplore"
+                className="inline-flex items-center justify-center rounded-md border border-border bg-card size-7 text-muted-foreground no-underline transition-all hover:bg-accent hover:border-accent hover:text-foreground group/exlink"
+              >
+                <FiExternalLink size={13} className="transition-transform duration-300 group-hover/exlink:rotate-12 group-hover/exlink:scale-110" />
+              </a>
+            )}
           </div>
         </div>
 

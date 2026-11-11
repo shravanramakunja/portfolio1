@@ -1,20 +1,13 @@
 import React from 'react';
 import {
-  SiJavascript,
   SiNodedotjs,
   SiPython,
-  SiHtml5,
-  SiCss,
   SiExpress,
-  SiNextdotjs,
   SiGooglegemini,
-  SiStreamlit,
-  SiGooglechrome,
   SiReact,
+  SiTypescript,
 } from 'react-icons/si';
 import {
-  FiDatabase,
-  FiCode,
   FiCpu,
   FiSearch,
   FiGithub,
@@ -22,36 +15,26 @@ import {
 } from 'react-icons/fi';
 
 const techConfig = {
-  JavaScript: { icon: SiJavascript, color: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20' },
   Node: { icon: SiNodedotjs, color: 'bg-green-500/10 text-green-400 border-green-500/20' },
   Python: { icon: SiPython, color: 'bg-blue-500/10 text-blue-400 border-blue-500/20' },
-  'Chrome API': { icon: SiGooglechrome, color: 'bg-purple-500/10 text-purple-400 border-purple-500/20' },
   Gemini: { icon: SiGooglegemini, color: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20' },
   RAG: { icon: FiSearch, color: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' },
   Transformers: { icon: FiCpu, color: 'bg-orange-500/10 text-orange-400 border-orange-500/20' },
-  BeautifulSoup: { icon: FiCode, color: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' },
-  Streamlit: { icon: SiStreamlit, color: 'bg-red-500/10 text-red-400 border-red-500/20' },
-  ChromaDB: { icon: FiDatabase, color: 'bg-teal-500/10 text-teal-400 border-teal-500/20' },
-  HTML: { icon: SiHtml5, color: 'bg-orange-600/10 text-orange-400 border-orange-600/20' },
-  CSS: { icon: SiCss, color: 'bg-blue-600/10 text-blue-400 border-blue-600/20' },
   Express: { icon: SiExpress, color: 'bg-zinc-500/10 text-zinc-400 border-zinc-500/20' },
   EJS: { icon: FiFileText, color: 'bg-pink-500/10 text-pink-400 border-pink-500/20' },
   'GitHub API': { icon: FiGithub, color: 'bg-gray-500/10 text-gray-400 border-gray-500/20' },
   AI: { icon: FiCpu, color: 'bg-violet-500/10 text-violet-400 border-violet-500/20' },
   React: { icon: SiReact, color: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' },
+  TypeScript: { icon: SiTypescript, color: 'bg-blue-600/10 text-blue-400 border-blue-600/20' },
 };
 
 const techStacks = {
-  AutoBulkSender: ['JavaScript', 'Node'],
   EventEase: ['EJS', 'Express', 'Node'],
   Inquisit: ['Python', 'RAG', 'Gemini'],
-  ZenAI: ['Python', 'ChromaDB', 'Streamlit', 'Gemini'],
-  BriefBot: ['Python', 'BeautifulSoup', 'Gemini'],
-  TabZero: ['HTML', 'CSS'],
   CodeSage: ['GitHub API', 'AI'],
   CasualGPTx: ['Python', 'Transformers'],
-  Flow: ['JavaScript', 'Chrome API'],
   Vedanth: ['React', 'Node', 'Express', 'AI'],
+  nanocoder: ['TypeScript', 'Node'],
 };
 
 const TechTag = ({ name }) => {
@@ -76,11 +59,6 @@ const TechTag = ({ name }) => {
 const Projects = () => {
   const projects = [
     {
-      title: 'AutoBulkSender',
-      description: 'automates certificate creation and email delivery.',
-      link: 'https://github.com/shravanramakunja/AutoBulkSender'
-    },
-    {
       title: 'EventEase',
       description: 'seamless event registration and check-in platform with automated workflows and attendance management.',
       link: 'https://github.com/shravanramakunja/EventEase'
@@ -89,21 +67,6 @@ const Projects = () => {
       title: 'Inquisit',
       description: 'rag-based ai application for generating questions and evaluating answers from documents.',
       link: 'https://github.com/shravanramakunja/Inquisit'
-    },
-    {
-      title: 'ZenAI',
-      description: 'medical rag chatbot using retrieval-augmented generation to provide accurate answers.',
-      link: 'https://github.com/shravanramakunja/ZenAI'
-    },
-    {
-      title: 'BriefBot',
-      description: 'ai-powered tool that automatically extracts and summarizes website content.',
-      link: 'https://github.com/shravanramakunja/BriefBot'
-    },
-    {
-      title: 'TabZero',
-      description: 'minimal browser-based interface built with clean html for lightweight usage (open source).',
-      link: 'https://github.com/shravanramakunja/TabZero'
     },
     {
       title: 'CodeSage',
@@ -116,14 +79,14 @@ const Projects = () => {
       link: 'https://github.com/shravanramakunja/CasualGPTx'
     },
     {
-      title: 'Flow',
-      description: 'intent-driven browser extension for managing tabs and boosting productivity (open source).',
-      link: 'https://github.com/shravanramakunja/Flow'
-    },
-    {
       title: 'Vedanth',
       description: 'ai-powered food analysis platform providing real-time nutritional insights, bringing healthcare from the hospital to your home.',
       link: 'https://github.com/shravanramakunja/Vedanth'
+    },
+    {
+      title: 'nanocoder',
+      description: 'open source contribution — merged pr #1955 moving the system-directory write guard into the shared path validator, fixing windows file operations.',
+      link: 'https://github.com/Nano-Collective/nanocoder/pull/1955'
     }
   ];
 
