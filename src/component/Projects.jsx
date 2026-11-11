@@ -5,7 +5,6 @@ import {
   SiExpress,
   SiGooglegemini,
   SiReact,
-  SiTypescript,
 } from 'react-icons/si';
 import {
   FiCpu,
@@ -25,7 +24,6 @@ const techConfig = {
   'GitHub API': { icon: FiGithub, color: 'bg-gray-500/10 text-gray-400 border-gray-500/20' },
   AI: { icon: FiCpu, color: 'bg-violet-500/10 text-violet-400 border-violet-500/20' },
   React: { icon: SiReact, color: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' },
-  TypeScript: { icon: SiTypescript, color: 'bg-blue-600/10 text-blue-400 border-blue-600/20' },
 };
 
 const techStacks = {
@@ -34,7 +32,6 @@ const techStacks = {
   CodeSage: ['GitHub API', 'AI'],
   CasualGPTx: ['Python', 'Transformers'],
   Vedanth: ['React', 'Node', 'Express', 'AI'],
-  nanocoder: ['TypeScript', 'Node'],
 };
 
 const TechTag = ({ name }) => {
@@ -82,11 +79,6 @@ const Projects = () => {
       title: 'Vedanth',
       description: 'ai-powered food analysis platform providing real-time nutritional insights, bringing healthcare from the hospital to your home.',
       link: 'https://github.com/shravanramakunja/Vedanth'
-    },
-    {
-      title: 'nanocoder',
-      description: 'open source contribution — merged pr #1955 moving the system-directory write guard into the shared path validator, fixing windows file operations.',
-      link: 'https://github.com/Nano-Collective/nanocoder/pull/1955'
     }
   ];
 

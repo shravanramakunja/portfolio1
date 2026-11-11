@@ -4,6 +4,7 @@ import Hero from './component/Hero';
 import About from './component/About';
 import Experience from './component/Experience';
 import Projects from './component/Projects';
+import OpenSource from './component/OpenSource';
 import Achievements from './component/Achievements';
 import Research from './component/Research';
 import Extras from './component/Extras';
@@ -16,7 +17,17 @@ import useClickSound from './hooks/useClickSound';
 
 import { FiSun, FiMoon } from 'react-icons/fi';
 
-const SECTIONS = ['about', 'experience', 'projects', 'achievements', 'research', 'extras'];
+const SECTIONS = ['about', 'experience', 'projects', 'opensource', 'achievements', 'research', 'extras'];
+
+const SECTION_LABELS = {
+  about: 'About',
+  experience: 'Experience',
+  projects: 'Projects',
+  opensource: 'Open Source',
+  achievements: 'Achievements',
+  research: 'Research',
+  extras: 'Extras',
+};
 
 function useTheme() {
   const [theme, setTheme] = useState(() => {
@@ -115,7 +126,7 @@ function Navbar({ theme, onToggleTheme }) {
                   : 'text-muted-foreground hover:text-foreground'
               }`}
             >
-              {id.charAt(0).toUpperCase() + id.slice(1)}
+              {SECTION_LABELS[id] || id}
             </a>
           ))}
         </div>
@@ -167,7 +178,7 @@ function Navbar({ theme, onToggleTheme }) {
                     : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
                 }`}
               >
-                {id.charAt(0).toUpperCase() + id.slice(1)}
+                {SECTION_LABELS[id] || id}
               </a>
             ))}
             <div className="border-t border-border mt-2 pt-2">
@@ -208,6 +219,8 @@ function App() {
       <Reveal><div className="relative"><Experience /><CornerBrackets /></div></Reveal>
       <div className="hatch-divider my-8" />
       <Reveal><div className="relative"><Projects /><CornerBrackets /></div></Reveal>
+      <div className="hatch-divider my-8" />
+      <Reveal><div className="relative"><OpenSource /><CornerBrackets /></div></Reveal>
       <div className="hatch-divider my-8" />
       <Reveal><div className="relative"><Achievements /><CornerBrackets /></div></Reveal>
       <div className="hatch-divider my-8" />
