@@ -1,5 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
-import { createPortal } from 'react-dom';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiExternalLink, FiImage } from 'react-icons/fi';
 
@@ -18,36 +17,10 @@ const publications = [
 ];
 
 const PublicationCard = ({ publication }) => {
-  const [mouseClient, setMouseClient] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
   const [showMobileImage, setShowMobileImage] = useState(false);
-  const previewRef = useRef(null);
-
-  const handleMouseMove = useCallback((e) => {
-    setMouseClient({ x: e.clientX, y: e.clientY });
-  }, []);
-
-  // Keep the floating preview fully inside the viewport using its real size.
-  const getPreviewStyle = useCallback(() => {
-    const margin = 16;
-    const el = previewRef.current;
-    const width = el?.offsetWidth ?? 320;
-    const height = el?.offsetHeight ?? 240;
-    const maxLeft = Math.max(margin, window.innerWidth - width - margin);
-    const maxTop = Math.max(margin, window.innerHeight - height - margin);
-    return {
-      left: Math.min(Math.max(mouseClient.x - 340, margin), maxLeft),
-      top: Math.min(Math.max(mouseClient.y - height / 2, margin), maxTop),
-    };
-  }, [mouseClient]);
 
   return (
-    <div
-      className="relative rounded-xl border border-border bg-card p-6 cursor-default"
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div className="relative rounded-xl border border-border bg-card p-6 cursor-default">
       <div className="relative z-10">
         <div className="flex items-center gap-2 mb-3">
           <span className="text-2xl">📄</span>
@@ -74,14 +47,26 @@ const PublicationCard = ({ publication }) => {
           <span className="text-muted-foreground"> — organized by {publication.organizer}</span>
         </p>
 
-        {/* Mobile view certificate button */}
-        <button
-          onClick={() => setShowMobileImage((prev) => !prev)}
-          className="sm:hidden mt-3 inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground transition-all hover:bg-accent hover:border-accent hover:text-foreground cursor-pointer"
-        >
-          <FiImage size={13} />
-          {showMobileImage ? 'Hide Certificate' : 'View Certificate'}
-        </button>
+        <div className="mt-4 flex flex-wrap items-center gap-3">
+          {publication.link && (
+            <a
+              href={publication.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-inner-shadow inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-xs font-bold text-primary-foreground no-underline transition-all duration-300 hover:gap-2.5 group/exlink"
+            >
+              <FiExternalLink size={13} className="transition-transform duration-300 group-hover/exlink:rotate-12 group-hover/exlink:scale-110" />
+              View paper on IEEE Xplore
+            </a>
+          )}
+          <button
+            onClick={() => setShowMobileImage((prev) => !prev)}
+            className="sm:hidden inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground transition-all hover:bg-accent hover:border-accent hover:text-foreground cursor-pointer"
+          >
+            <FiImage size={13} />
+            {showMobileImage ? 'Hide Certificate' : 'View Certificate'}
+          </button>
+        </div>
       </div>
 
       {/* Mobile inline certificate */}
@@ -103,34 +88,6 @@ const PublicationCard = ({ publication }) => {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Desktop cursor-following certificate.
-          Rendered via portal so the `fixed` positioning resolves against the
-          viewport; the Reveal wrapper's filter/transform would otherwise make
-          it a containing block and offset the preview. */}
-      {createPortal(
-        <AnimatePresence>
-          {isHovered && (
-            <motion.div
-              ref={previewRef}
-              className="pointer-events-none hidden sm:block fixed z-50 w-72 lg:w-80 rounded-xl overflow-hidden shadow-2xl border border-border/50"
-              style={getPreviewStyle()}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ opacity: { duration: 0.15 }, scale: { duration: 0.15 } }}
-            >
-              <img
-                src={publication.image}
-                alt={publication.imageAlt}
-                className="w-full h-auto object-cover"
-                draggable={false}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>,
-        document.body
-      )}
     </div>
   );
 };
