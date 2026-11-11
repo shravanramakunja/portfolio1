@@ -8,14 +8,14 @@ const Experience = () => {
       date: 'Nov 2025 - April 2026',
       role: 'President',
       description: 'leading nova innovative compskey as president, driving innovation and fostering a collaborative environment for engineering students.',
-      link: 'http://nicclub.dev/'
+      link: 'https://nicmvjce.pages.dev/'
     },
     {
       company: 'Nova Innovative Compskey',
       date: 'Dec 2024 - Nov 2025',
       role: 'Design Sub Lead',
       description: "guide and supervise the club's design team in developing engineering project concepts.",
-      link: 'http://nicclub.dev/'
+      link: 'https://nicmvjce.pages.dev/'
     }
   ];
 
