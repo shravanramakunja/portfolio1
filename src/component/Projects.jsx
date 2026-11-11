@@ -3,12 +3,10 @@ import {
   SiNodedotjs,
   SiPython,
   SiExpress,
-  SiGooglegemini,
   SiReact,
 } from 'react-icons/si';
 import {
   FiCpu,
-  FiSearch,
   FiGithub,
   FiFileText,
 } from 'react-icons/fi';
@@ -16,8 +14,6 @@ import {
 const techConfig = {
   Node: { icon: SiNodedotjs, color: 'bg-green-500/10 text-green-400 border-green-500/20' },
   Python: { icon: SiPython, color: 'bg-blue-500/10 text-blue-400 border-blue-500/20' },
-  Gemini: { icon: SiGooglegemini, color: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20' },
-  RAG: { icon: FiSearch, color: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' },
   Transformers: { icon: FiCpu, color: 'bg-orange-500/10 text-orange-400 border-orange-500/20' },
   Express: { icon: SiExpress, color: 'bg-zinc-500/10 text-zinc-400 border-zinc-500/20' },
   EJS: { icon: FiFileText, color: 'bg-pink-500/10 text-pink-400 border-pink-500/20' },
@@ -28,7 +24,6 @@ const techConfig = {
 
 const techStacks = {
   EventEase: ['EJS', 'Express', 'Node'],
-  Inquisit: ['Python', 'RAG', 'Gemini'],
   CodeSage: ['GitHub API', 'AI'],
   CasualGPTx: ['Python', 'Transformers'],
   Vedanth: ['React', 'Node', 'Express', 'AI'],
@@ -59,11 +54,6 @@ const Projects = () => {
       title: 'EventEase',
       description: 'seamless event registration and check-in platform with automated workflows and attendance management.',
       link: 'https://github.com/shravanramakunja/EventEase'
-    },
-    {
-      title: 'Inquisit',
-      description: 'rag-based ai application for generating questions and evaluating answers from documents.',
-      link: 'https://github.com/shravanramakunja/Inquisit'
     },
     {
       title: 'CodeSage',
