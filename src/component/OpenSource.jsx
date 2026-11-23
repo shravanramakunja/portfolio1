@@ -30,7 +30,13 @@ const contributions = [
 
 const ContributionCard = ({ contribution }) => {
   return (
-    <div className="relative rounded-xl border border-border bg-card p-6 cursor-default">
+    <a
+      href={contribution.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      title="View pull request on GitHub"
+      className="group relative block rounded-xl border border-border bg-card p-6 no-underline transition-all hover:border-border/50 hover:bg-card/80"
+    >
       <div className="relative z-10">
         <div className="flex items-center gap-2 mb-3">
           <FiGitPullRequest size={20} className="text-muted-foreground shrink-0" />
@@ -39,15 +45,9 @@ const ContributionCard = ({ contribution }) => {
               {contribution.project}
               <span className="text-muted-foreground font-normal"> — {contribution.title}</span>
             </h3>
-            <a
-              href={contribution.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="View pull request on GitHub"
-              className="inline-flex items-center justify-center rounded-md border border-border bg-card size-7 text-muted-foreground no-underline transition-all hover:bg-accent hover:border-accent hover:text-foreground group/exlink"
-            >
-              <FiExternalLink size={13} className="transition-transform duration-300 group-hover/exlink:rotate-12 group-hover/exlink:scale-110" />
-            </a>
+            <span className="inline-flex items-center justify-center rounded-md border border-border bg-card size-7 text-muted-foreground transition-all group-hover:bg-accent group-hover:border-accent group-hover:text-foreground">
+              <FiExternalLink size={13} className="transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110" />
+            </span>
           </div>
         </div>
 
@@ -63,10 +63,13 @@ const ContributionCard = ({ contribution }) => {
         </p>
 
         <p className="text-muted-foreground text-xs mt-3">
-          {contribution.org}/{contribution.project} · <span className="text-foreground font-semibold">PR {contribution.pr}</span>
+          {contribution.org}/{contribution.project} ·{' '}
+          <span className="text-foreground font-semibold underline-offset-2 group-hover:underline">
+            PR {contribution.pr}
+          </span>
         </p>
       </div>
-    </div>
+    </a>
   );
 };
 
