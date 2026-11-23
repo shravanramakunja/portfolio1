@@ -14,6 +14,18 @@ const contributions = [
     status: 'Merged',
     link: 'https://github.com/Nano-Collective/nanocoder/pull/1955',
   },
+  {
+    id: 2,
+    project: 'nanocoder',
+    org: 'Nano-Collective',
+    title: 'feat(execute-bash): let the model set a per-call timeout',
+    description:
+      'added an optional timeout_seconds to execute_bash, clamped to 1–300s with 120s default, forwarded through both the tool handler and the TUI streaming path — long builds no longer die at 2 minutes, and timeouts report the limit actually applied.',
+    pr: '#2176',
+    date: 'Nov 2026',
+    status: 'Merged',
+    link: 'https://github.com/Nano-Collective/nanocoder/pull/2176',
+  },
 ];
 
 const ContributionCard = ({ contribution }) => {
