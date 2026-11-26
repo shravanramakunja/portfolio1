@@ -26,6 +26,18 @@ const contributions = [
     status: 'Merged',
     link: 'https://github.com/Nano-Collective/nanocoder/pull/2176',
   },
+  {
+    id: 3,
+    project: 'nanocoder',
+    org: 'Nano-Collective',
+    title: 'feat(prompt): inline @path imports from AGENTS.md',
+    description:
+      'added @path imports to AGENTS.md so a line that is exactly a file reference is replaced with the file contents when the prompt is built — imports resolve relative to the importing file, nest up to 5 levels, stay contained to the project root or config dir, and leave fenced code blocks untouched.',
+    pr: '#2311',
+    date: 'Nov 2026',
+    status: 'Merged',
+    link: 'https://github.com/Nano-Collective/nanocoder/pull/2311',
+  },
 ];
 
 const ContributionCard = ({ contribution }) => {
